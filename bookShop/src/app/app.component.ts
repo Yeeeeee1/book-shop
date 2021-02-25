@@ -8,6 +8,6 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 export class AppComponent {
   title = 'bookShop';
 
-  @ViewChild("appTitle", { static: false })
+  @ViewChild('appTitle', { static: false })
   nameParagraph!: ElementRef;
 }
