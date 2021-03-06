@@ -1,7 +1,7 @@
-<div class="book-wrapper">
-    <h1>{{ arr.name }}</h1>
-    <p>{{ arr.description }}</p>
-    <h2>{{ arr.price }}$</h2>
-    <h3>{{ arr.category }}</h3>
-    <button (click)="getBook()">Buy</button>
+<div class="book-wrapper" *ngFor="let item of bookData">
+    <h1>{{ item.name }}</h1>
+    <p>{{ item.description }}</p>
+    <h2>{{ item.price }}$</h2>
+    <h3>{{ item.category }}</h3>
+    <button (click)="onBuy(item)" [disabled]="!item.isAvailable">Buy</button>
 </div>
