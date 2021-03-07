@@ -9,12 +9,10 @@ import { IBook, Category } from './models/BookModel';
 export class AppComponent implements OnInit {
   title = 'bookShop';
 
-  onBuy(book: IBook): void {
-    alert("Ok!");
-  }
-  
   bookData: IBook[] = [];
-  
+
+  onBuy(book: IBook): void {}
+
   ngOnInit(): void {
     this.bookData = [
     {
@@ -43,6 +41,4 @@ export class AppComponent implements OnInit {
     },
   ];
   }
-
-   
 }

@@ -9,7 +9,7 @@ import { IBook, Category } from '../models/BookModel';
 })
 export class BookComponentComponent implements OnInit {
 
-  @Input() bookData:IBook[] | undefined;
+  @Input() bookData: IBook[] | undefined;
 
   @Output() buyEvent = new EventEmitter<IBook>();
 
