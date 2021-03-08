@@ -15,6 +15,7 @@ export class BookComponentComponent implements OnInit {
 
   onBuy(book: IBook): void {
     this.buyEvent.emit(book);
+    book.isAvailable = false;
   }
   constructor() { }
 

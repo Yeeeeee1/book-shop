@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { IBook, Category } from './models/BookModel';
+import { BooksService } from './services/books.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,17 @@ import { IBook, Category } from './models/BookModel';
 export class AppComponent implements OnInit {
   title = 'bookShop';
 
+  basketData: IBook[] = [];
+
   bookData: IBook[] = [];
 
-  onBuy(book: IBook): void {}
+  onBuy(book: IBook): void {
+    this.bookService.addBook(book);
+  }
+
+  constructor (private bookService: BooksService) {
+    this.bookService.onClick.subscribe(cnt => this.basketData = cnt);
+  }
 
   ngOnInit(): void {
     this.bookData = [
@@ -22,6 +31,8 @@ export class AppComponent implements OnInit {
       category: Category.sacredText,
       createDate: 0,
       isAvailable: true,
+      count: 1,
+      id: 0,
     },
     {
       name: 'It',
@@ -30,6 +41,8 @@ export class AppComponent implements OnInit {
       category: Category.fiction,
       createDate: 5,
       isAvailable: false,
+      count: 1,
+      id: 1,
     },
     {
       name: 'War and peace',
@@ -38,6 +51,8 @@ export class AppComponent implements OnInit {
       category: Category.nonFiction,
       createDate: 0,
       isAvailable: true,
+      count: 1,
+      id: 2,
     },
   ];
   }

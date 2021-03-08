@@ -5,6 +5,8 @@ export interface IBook {
     category: Category;
     createDate: number;
     isAvailable: boolean;
+    count: number;
+    id: number;
 }
 
 export enum Category {

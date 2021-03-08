@@ -4,4 +4,5 @@
     <h2>{{ book.price }}$</h2>
     <h3>{{ book.category }}</h3>
     <button (click)="onBuy(book)" [disabled]="!book.isAvailable">Buy</button>
+    <input placeholder="Count" [(ngModel)]="book.count" [disabled]="!book.isAvailable">
 </div>
