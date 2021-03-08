@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, AfterViewInit } from '@angular/core';
 import { IBook, Category } from './models/BookModel';
 import { BooksService } from './services/books.service';
 
@@ -7,8 +7,15 @@ import { BooksService } from './services/books.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'bookShop';
+  @ViewChild('appTitle', { static: false })
+  _pRef!: ElementRef;
+
+  ngAfterViewInit() {
+    this._pRef.nativeElement.textContent = "bookShop";
+  }
+  
 
   basketData: IBook[] = [];
 
