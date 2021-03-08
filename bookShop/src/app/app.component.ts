@@ -10,22 +10,21 @@ import { BooksService } from './services/books.service';
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'bookShop';
   @ViewChild('appTitle', { static: false })
-  _pRef!: ElementRef;
-
-  ngAfterViewInit() {
-    this._pRef.nativeElement.textContent = "bookShop";
-  }
-  
+  pRef!: ElementRef;
 
   basketData: IBook[] = [];
 
   bookData: IBook[] = [];
 
+  ngAfterViewInit(): void {
+    this.pRef.nativeElement.textContent = 'bookShop';
+  }
+
   onBuy(book: IBook): void {
     this.bookService.addBook(book);
   }
 
-  constructor (private bookService: BooksService) {
+  constructor(private bookService: BooksService) {
     this.bookService.onClick.subscribe(cnt => this.basketData = cnt);
   }
 

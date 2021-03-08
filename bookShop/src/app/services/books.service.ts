@@ -7,8 +7,7 @@ import { IBook } from '../models/BookModel';
 })
 export class BooksService {
 
-  onClick:EventEmitter<IBook[]> = new EventEmitter();
-  
+  onClick: EventEmitter<IBook[]> = new EventEmitter();
 
   basketData: IBook[] = [];
 
@@ -16,7 +15,7 @@ export class BooksService {
     this.basketData.splice(id, 1);
   }
 
-  addBook(book: IBook):void {
+  addBook(book: IBook): void {
     this.basketData.push(book);
     console.log(this.basketData);
     this.onClick.emit(this.basketData);

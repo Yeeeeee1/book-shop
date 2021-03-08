@@ -9,18 +9,17 @@ import { BooksService } from '../../services/books.service';
 })
 export class CartItemComponentComponent implements OnInit {
 
+  basketData: IBook[] = [];
+
   removeBook(id: number): void {
     this.booksService.removeBook(id);
     console.log(this.basketData);
   }
 
-  basketData: IBook[] = [];
-  
   constructor(private booksService: BooksService) {
     this.booksService.onClick.subscribe(cnt => this.basketData = cnt);
    }
 
   ngOnInit(): void {
   }
-
 }
