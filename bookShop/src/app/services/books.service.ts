@@ -26,7 +26,7 @@ const PRODUCTS: IBook[] = [
   {
     name: 'War and peace',
     description: 'An epic novel by Leo Nikolaevich Tolstoy, describing Russian society in the era of wars against Napoleon in 1805-1812. The epilogue of the novel brings the story to 1820.',
-    price: 2.99,
+    price: 5,
     category: Category.nonFiction,
     createDate: 0,
     isAvailable: true,
@@ -42,7 +42,7 @@ export class BooksService {
 
   products: IBook[] = PRODUCTS;
 
-  getBooks() {
+  getBooks(): IBook[] {
     return this.products;
   }
 
