@@ -1,0 +1,9 @@
+<h1>Корзина</h1>
+<div class="book-wrapper" *ngFor="let book of basketData; let index = index">
+    <button (click)="removeBook(index)">Delete</button>
+    <h1>{{ book.name }}</h1>
+    <p>{{ book.description }}</p>
+    <h2>{{ book.price }}$</h2>
+    <h3>{{ book.category }}</h3>
+    <h3>Count: {{ book.count }}</h3>
+</div>

@@ -1,0 +1,8 @@
+<div class="book-wrapper" *ngFor="let book of bookData">
+    <h1>{{ book.name }}</h1>
+    <p>{{ book.description }}</p>
+    <h2>{{ book.price }}$</h2>
+    <h3>{{ book.category }}</h3>
+    <button (click)="onBuy(book)" [disabled]="!book.isAvailable">Buy</button>
+    <input placeholder="Count" [(ngModel)]="book.count" [disabled]="!book.isAvailable">
+</div>
