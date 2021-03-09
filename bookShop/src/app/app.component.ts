@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   constructor(private bookService: BooksService) {
-    this.bookService.onClick.subscribe(cnt => this.basketData = cnt);
+    this.bookService.clickEvent.subscribe(cnt => this.basketData = cnt);
   }
 
   ngOnInit(): void {

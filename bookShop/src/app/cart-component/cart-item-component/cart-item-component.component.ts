@@ -17,7 +17,7 @@ export class CartItemComponentComponent implements OnInit {
   }
 
   constructor(private booksService: BooksService) {
-    this.booksService.onClick.subscribe(cnt => this.basketData = cnt);
+    this.booksService.clickEvent.subscribe(cnt => this.basketData = cnt);
    }
 
   ngOnInit(): void {
