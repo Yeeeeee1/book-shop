@@ -11,6 +11,18 @@ export class CartItemComponentComponent implements OnInit {
 
   basketData: IBook[] = [];
 
+  onChangeInput(): void {
+    this.cartService.onChangeInput();
+  }
+
+  increaseQuantity(book: IBook): void {
+    this.cartService.increaseQuantity(book);
+  }
+
+  decreaseQuantity(book: IBook): void {
+    this.cartService.decreaseQuantity(book);
+  }
+
   removeBook(id: number): void {
     this.cartService.removeBook(id);
     console.log(this.basketData);

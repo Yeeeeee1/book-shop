@@ -5,7 +5,7 @@ import { IBook, Category } from '../models/BookModel';
   selector: 'app-book-component',
   templateUrl: './book-component.component.html',
   styleUrls: ['./book-component.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookComponentComponent implements OnInit {
 
@@ -17,7 +17,9 @@ export class BookComponentComponent implements OnInit {
     this.buyEvent.emit(book);
     book.isAvailable = false;
   }
-  constructor() { }
+  constructor() {
+    
+   }
 
   ngOnInit(): void {
   }
