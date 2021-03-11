@@ -47,7 +47,5 @@ export class BooksService {
     return this.products;
   }
 
-  constructor() {
-    
-   }
+  constructor() {}
 }

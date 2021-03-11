@@ -9,6 +9,10 @@ import { IBook } from '../models/BookModel';
 })
 export class CartComponentComponent implements OnInit {
 
+  totalQuantity = 0;
+
+  totalSum = 0;
+
   removeAll(): void {
     this.cartService.removeAll();
   }
@@ -17,10 +21,6 @@ export class CartComponentComponent implements OnInit {
     this.cartService.clickQuantityEvent.subscribe(cnt => this.totalQuantity = cnt);
     this.cartService.clickSumEvent.subscribe(cnt => this.totalSum = cnt);
   }
-
-  totalQuantity: number = 0;
-
-  totalSum: number = 0;
 
   ngOnInit(): void {
   }
