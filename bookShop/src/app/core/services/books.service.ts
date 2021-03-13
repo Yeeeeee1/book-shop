@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IBook, Category } from '../models/BookModel';
+import { IBook, Category } from '../../shared/models/BookModel';
 import { CartService } from './cart.service';
 
 const PRODUCTS: IBook[] = [
