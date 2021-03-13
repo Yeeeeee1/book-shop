@@ -17,14 +17,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   bookData: IBook[] = [];
 
-  ngAfterViewInit(): void {
-    this.pRef.nativeElement.textContent = 'bookShop';
-  }
-
-  onBuy(book: IBook): void {
-    this.cartService.addBook(book);
-  }
-
   constructor(private cartService: CartService, private bookService: BooksService) {
     this.cartService.clickEvent.subscribe(cnt => this.basketData = cnt);
     this.cartService.removeEvent.subscribe(cnt => this.bookData = cnt);
@@ -32,5 +24,13 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.bookData = this.bookService.getBooks();
+  }
+
+  ngAfterViewInit(): void {
+    this.pRef.nativeElement.textContent = 'bookShop';
+  }
+
+  onBuy(book: IBook): void {
+    this.cartService.addBook(book);
   }
 }

@@ -6,6 +6,7 @@ const SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
   providedIn: 'root'
 })
 export class GeneratorService {
+  constructor() { }
 
   GeneratorFactory(n: number): string {
     const arr: string[] = [];
@@ -19,6 +20,4 @@ export class GeneratorService {
 
     return newArr.join('');
   }
-
-  constructor() { }
 }

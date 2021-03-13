@@ -23,6 +23,8 @@ export class CartService {
 
   totalSum  = 0;
 
+  constructor(private booksService: BooksService) {}
+
   onChangeInput(): void {
     this.updateCartData();
   }
@@ -67,6 +69,4 @@ export class CartService {
     this.clickQuantityEvent.emit(this.totalQuantity);
     this.removeEvent.emit(this.booksData);
   }
-
-  constructor(private booksService: BooksService) {}
 }

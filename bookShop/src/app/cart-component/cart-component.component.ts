@@ -13,16 +13,16 @@ export class CartComponentComponent implements OnInit {
 
   totalSum = 0;
 
-  removeAll(): void {
-    this.cartService.removeAll();
-  }
-
   constructor(private cartService: CartService) {
     this.cartService.clickQuantityEvent.subscribe(cnt => this.totalQuantity = cnt);
     this.cartService.clickSumEvent.subscribe(cnt => this.totalSum = cnt);
   }
 
   ngOnInit(): void {
+  }
+
+  removeAll(): void {
+    this.cartService.removeAll();
   }
 
 }

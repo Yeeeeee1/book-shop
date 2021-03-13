@@ -14,7 +14,14 @@ import { ConstantsService } from '../services/constants.service';
 export class AboutComponentComponent implements OnInit {
   rval = this.generatorService.GeneratorFactory(5);
 
-  constructor(@Optional() private generatorService: GeneratorService, private localStorageService: LocalStorageService, private booksService: BooksService, private confugOptionService: ConfigOptionsService, private cartService: CartService, private constantsService: ConstantsService) { }
+  constructor(
+    @Optional() private generatorService: GeneratorService,
+    private localStorageService: LocalStorageService,
+    private booksService: BooksService,
+    private confugOptionService: ConfigOptionsService,
+    private cartService: CartService,
+    private constantsService: ConstantsService
+    ) {}
 
   ngOnInit(): void {
   }

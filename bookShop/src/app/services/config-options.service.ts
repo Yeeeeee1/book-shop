@@ -7,6 +7,8 @@ import { IOption } from '../models/OptionModel';
 })
 export class ConfigOptionsService {
 
+  constructor(private localStorageService: LocalStorageService) { }
+
   setOption(option: IOption): void {
     this.localStorageService.setItem('option', option);
   }
@@ -14,6 +16,4 @@ export class ConfigOptionsService {
   getOption(key: string): void {
     this.localStorageService.getItem(key);
   }
-
-  constructor(private localStorageService: LocalStorageService) { }
 }

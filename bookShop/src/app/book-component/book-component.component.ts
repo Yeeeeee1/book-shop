@@ -11,14 +11,14 @@ export class BookComponentComponent implements OnInit {
   @Input() bookData: IBook[] | undefined;
 
   @Output() buyEvent = new EventEmitter<IBook>();
+  constructor() {}
+
+  ngOnInit(): void {
+  }
 
   onBuy(book: IBook): void {
     this.buyEvent.emit(book);
     book.isAvailable = false;
-  }
-  constructor() {}
-
-  ngOnInit(): void {
   }
 
 }

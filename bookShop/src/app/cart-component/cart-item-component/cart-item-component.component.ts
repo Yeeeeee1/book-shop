@@ -10,6 +10,12 @@ import { CartService } from '../../services/cart.service';
 export class CartItemComponentComponent implements OnInit {
 
   basketData: IBook[] = [];
+  constructor(private cartService: CartService) {
+    this.cartService.clickEvent.subscribe(cnt => this.basketData = cnt);
+   }
+
+  ngOnInit(): void {
+  }
 
   onChangeInput(): void {
     this.cartService.onChangeInput();
@@ -26,12 +32,5 @@ export class CartItemComponentComponent implements OnInit {
   removeBook(id: number): void {
     this.cartService.removeBook(id);
     console.log(this.basketData);
-  }
-
-  constructor(private cartService: CartService) {
-    this.cartService.clickEvent.subscribe(cnt => this.basketData = cnt);
-   }
-
-  ngOnInit(): void {
   }
 }
