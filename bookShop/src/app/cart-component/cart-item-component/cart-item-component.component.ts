@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IBook, Category } from 'src/app/models/BookModel';
-import { BooksService } from '../../services/books.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-cart-item-component',
@@ -10,16 +10,27 @@ import { BooksService } from '../../services/books.service';
 export class CartItemComponentComponent implements OnInit {
 
   basketData: IBook[] = [];
-
-  removeBook(id: number): void {
-    this.booksService.removeBook(id);
-    console.log(this.basketData);
-  }
-
-  constructor(private booksService: BooksService) {
-    this.booksService.clickEvent.subscribe(cnt => this.basketData = cnt);
+  constructor(private cartService: CartService) {
+    this.cartService.clickEvent.subscribe(cnt => this.basketData = cnt);
    }
 
   ngOnInit(): void {
+  }
+
+  onChangeInput(): void {
+    this.cartService.onChangeInput();
+  }
+
+  increaseQuantity(book: IBook): void {
+    this.cartService.increaseQuantity(book);
+  }
+
+  decreaseQuantity(book: IBook): void {
+    this.cartService.decreaseQuantity(book);
+  }
+
+  removeBook(id: number): void {
+    this.cartService.removeBook(id);
+    console.log(this.basketData);
   }
 }

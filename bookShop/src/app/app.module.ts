@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { BookComponentComponent } from './book-component/book-component.component';
 import { CartComponentComponent } from './cart-component/cart-component.component';
 import { CartItemComponentComponent } from './cart-component/cart-item-component/cart-item-component.component';
+import { AboutComponentComponent } from './about-component/about-component.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BookComponentComponent,
     CartComponentComponent,
-    CartItemComponentComponent
+    CartItemComponentComponent,
+    AboutComponentComponent
   ],
   imports: [
     BrowserModule,

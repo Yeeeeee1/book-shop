@@ -5,21 +5,20 @@ import { IBook, Category } from '../models/BookModel';
   selector: 'app-book-component',
   templateUrl: './book-component.component.html',
   styleUrls: ['./book-component.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookComponentComponent implements OnInit {
 
   @Input() bookData: IBook[] | undefined;
 
   @Output() buyEvent = new EventEmitter<IBook>();
+  constructor() {}
+
+  ngOnInit(): void {
+  }
 
   onBuy(book: IBook): void {
     this.buyEvent.emit(book);
     book.isAvailable = false;
-  }
-  constructor() { }
-
-  ngOnInit(): void {
   }
 
 }

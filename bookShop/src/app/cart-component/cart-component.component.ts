@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { BooksService } from '../services/books.service';
+import { CartService } from '../services/cart.service';
 import { IBook } from '../models/BookModel';
 
 @Component({
@@ -9,11 +9,20 @@ import { IBook } from '../models/BookModel';
 })
 export class CartComponentComponent implements OnInit {
 
-  constructor() {
+  totalQuantity = 0;
 
+  totalSum = 0;
+
+  constructor(private cartService: CartService) {
+    this.cartService.clickQuantityEvent.subscribe(cnt => this.totalQuantity = cnt);
+    this.cartService.clickSumEvent.subscribe(cnt => this.totalSum = cnt);
   }
 
   ngOnInit(): void {
+  }
+
+  removeAll(): void {
+    this.cartService.removeAll();
   }
 
 }
