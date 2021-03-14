@@ -15,6 +15,5 @@ import { OrdersModule } from './orders.module';
       OrdersModule
   ],
   providers: [],
-  bootstrap: []
 })
 export class SharedModule { }

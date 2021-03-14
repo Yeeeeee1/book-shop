@@ -6,7 +6,7 @@ import { BookComponentComponent } from './book-component/book-component.componen
 
 @NgModule({
   declarations: [
-      BookComponentComponent
+    BookComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -16,6 +16,5 @@ import { BookComponentComponent } from './book-component/book-component.componen
     BookComponentComponent
   ],
   providers: [],
-  bootstrap: []
 })
 export class BookModule { }

@@ -9,6 +9,5 @@ import { BrowserModule } from '@angular/platform-browser';
     FormsModule,
   ],
   providers: [],
-  bootstrap: []
 })
 export class OrdersModule { }

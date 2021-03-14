@@ -19,6 +19,5 @@ import { CartItemComponentComponent } from './cart-component/cart-item-component
     CartItemComponentComponent
   ],
   providers: [],
-  bootstrap: []
 })
 export class CartModule { }
