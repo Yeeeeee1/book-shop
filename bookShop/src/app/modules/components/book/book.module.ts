@@ -14,7 +14,6 @@ import { BookComponentComponent } from './book-component/book-component.componen
   ],
   exports: [
     BookComponentComponent
-  ],
-  providers: [],
+  ]
 })
 export class BookModule { }

@@ -7,8 +7,8 @@ import { CartItemComponentComponent } from './cart-component/cart-item-component
 
 @NgModule({
   declarations: [
-      CartComponentComponent,
-      CartItemComponentComponent
+    CartComponentComponent,
+    CartItemComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -16,8 +16,6 @@ import { CartItemComponentComponent } from './cart-component/cart-item-component
   ],
   exports: [
     CartComponentComponent,
-    CartItemComponentComponent
-  ],
-  providers: [],
+  ]
 })
 export class CartModule { }

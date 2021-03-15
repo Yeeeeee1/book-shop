@@ -7,7 +7,6 @@ import { BrowserModule } from '@angular/platform-browser';
   imports: [
     BrowserModule,
     FormsModule,
-  ],
-  providers: [],
+  ]
 })
 export class OrdersModule { }

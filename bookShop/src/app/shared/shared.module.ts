@@ -13,7 +13,6 @@ import { OrdersModule } from './orders.module';
   exports: [
       CommonModule,
       OrdersModule
-  ],
-  providers: [],
+  ]
 })
 export class SharedModule { }
