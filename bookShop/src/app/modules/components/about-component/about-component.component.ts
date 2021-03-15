@@ -1,10 +1,10 @@
 import { Component, OnInit, Optional } from '@angular/core';
-import { GeneratorService } from '../services/generator.service';
-import { LocalStorageService } from '../services/local-storage.service';
-import { BooksService } from '../services/books.service';
-import { ConfigOptionsService } from '../services/config-options.service';
-import { CartService } from '../services/cart.service';
-import { ConstantsService } from '../services/constants.service';
+import { GeneratorService } from '../../../core/services/generator.service';
+import { LocalStorageService } from '../../../core/services/local-storage.service';
+import { BooksService } from '../../../core/services/books.service';
+import { ConfigOptionsService } from '../../../core/services/config-options.service';
+import { CartService } from '../../../core/services/cart.service';
+import { ConstantsService } from '../../../core/services/constants.service';
 
 @Component({
   selector: 'app-about-component',

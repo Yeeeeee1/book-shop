@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { IBook, Category } from '../models/BookModel';
+import { IBook, Category } from '../../shared/models/BookModel';
 import { BooksService } from './books.service';
 
 @Injectable({

@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef, OnInit, AfterViewInit } from '@angular/core';
-import { IBook, Category } from './models/BookModel';
-import { BooksService } from './services/books.service';
-import { CartService } from './services/cart.service';
+import { IBook, Category } from './shared/models/BookModel';
+import { BooksService } from './core/services/books.service';
+import { CartService } from './core/services/cart.service';
 
 @Component({
   selector: 'app-root',
