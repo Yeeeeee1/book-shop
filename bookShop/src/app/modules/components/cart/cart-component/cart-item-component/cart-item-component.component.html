@@ -1,15 +1,25 @@
-<div class="book-wrapper" *ngFor="let book of basketData; let index = index">
-  <button (click)="removeBook(index)">Delete</button>
-  <h1>{{ book.name }}</h1>
-  <p>{{ book.description }}</p>
-  <h2>{{ book.price }}$</h2>
-  <h3>{{ book.category }}</h3>
-  <h3>Count: {{ book.count }}</h3>
-  <input
-    placeholder="Count"
-    [(ngModel)]="book.count"
-    (change)="onChangeInput()"
-  />
-  <i class="material-icons" (click)="increaseQuantity(book)">arrow_upward</i>
-  <i class="material-icons" (click)="decreaseQuantity(book)">arrow_downward</i>
+<div *ngIf="basketData.length > 0; else emptyBlock">
+  <div
+    class="book-wrapper"
+    *ngFor="let book of basketData; let index = index"
+    appChangeBackground
+  >
+    <button (click)="removeBook(index)">Delete</button>
+    <h1>{{ book.name }}</h1>
+    <p>{{ book.description }}</p>
+    <h2>{{ book.price }}$</h2>
+    <h3>{{ book.category }}</h3>
+    <h3>Count: {{ book.count }}</h3>
+    <input
+      placeholder="Count"
+      [(ngModel)]="book.count"
+      (change)="onChangeInput()"
+    />
+    <i class="material-icons" (click)="increaseQuantity(book)">arrow_upward</i>
+    <i class="material-icons" (click)="decreaseQuantity(book)"
+      >arrow_downward</i
+    >
+  </div>
 </div>
+
+<ng-template #emptyBlock>You not bought anything</ng-template>
