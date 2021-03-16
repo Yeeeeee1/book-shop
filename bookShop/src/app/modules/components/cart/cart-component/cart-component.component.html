@@ -1,6 +1,8 @@
 <h1>Корзина</h1>
 
-<button (click)="removeAll()">Remove all</button>
+<button (click)="removeAll()" appChangeOnclickElement [color]="'red'">
+  Remove all
+</button>
 
 <h1>Sum: {{ totalSum }}</h1>
 
