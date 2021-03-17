@@ -5,17 +5,15 @@ import { CartService } from '../../../../../core/services/cart.service';
 @Component({
   selector: 'app-cart-item-component',
   templateUrl: './cart-item-component.component.html',
-  styleUrls: ['./cart-item-component.component.scss']
+  styleUrls: ['./cart-item-component.component.scss'],
 })
 export class CartItemComponentComponent implements OnInit {
-
   basketData: IBook[] = [];
   constructor(private cartService: CartService) {
-    this.cartService.clickEvent.subscribe(cnt => this.basketData = cnt);
-   }
-
-  ngOnInit(): void {
+    this.cartService.clickEvent.subscribe((cnt) => (this.basketData = cnt));
   }
+
+  ngOnInit(): void {}
 
   onChangeInput(): void {
     this.cartService.onChangeInput();

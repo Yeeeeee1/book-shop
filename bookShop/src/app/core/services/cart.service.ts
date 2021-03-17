@@ -3,10 +3,9 @@ import { IBook, Category } from '../../shared/models/BookModel';
 import { BooksService } from './books.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
-
   clickEvent: EventEmitter<IBook[]> = new EventEmitter();
 
   clickSumEvent: EventEmitter<number> = new EventEmitter();
@@ -21,7 +20,7 @@ export class CartService {
 
   totalQuantity = 0;
 
-  totalSum  = 0;
+  totalSum = 0;
 
   constructor(private booksService: BooksService) {}
 
@@ -62,11 +61,21 @@ export class CartService {
   }
 
   updateCartData(): void {
-    this.totalQuantity = Number(this.basketData.reduce((accumulator, currentValue) => accumulator + currentValue.count, 0));
-    this.totalSum = this.basketData.reduce((accumulator, currentValue) => (accumulator + currentValue.price) * currentValue.count, 0);
+    this.totalQuantity = Number(
+      this.basketData.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.count,
+        0
+      )
+    );
+    this.totalSum = this.basketData.reduce(
+      (accumulator, currentValue) =>
+        (accumulator + currentValue.price) * currentValue.count,
+      0
+    );
     this.clickEvent.emit(this.basketData);
     this.clickSumEvent.emit(this.totalSum);
     this.clickQuantityEvent.emit(this.totalQuantity);
     this.removeEvent.emit(this.booksData);
+    console.log(this.basketData);
   }
 }
