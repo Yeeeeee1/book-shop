@@ -14,7 +14,7 @@ export class CartService {
 
   removeEvent: EventEmitter<IBook[]> = new EventEmitter();
 
-  booksData: IBook[] = this.booksService.getBooks();
+  booksData!: IBook[];
 
   basketData: IBook[] = [];
 
@@ -22,7 +22,9 @@ export class CartService {
 
   totalSum = 0;
 
-  constructor(private booksService: BooksService) {}
+  constructor(private booksService: BooksService) {
+    this.booksService.getBooks().subscribe((n) => (this.booksData = n));
+  }
 
   onChangeInput(): void {
     this.updateCartData();

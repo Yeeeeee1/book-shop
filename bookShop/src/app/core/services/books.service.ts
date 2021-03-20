@@ -45,8 +45,8 @@ const PRODUCTS: IBook[] = [
 export class BooksService {
   products: IBook[] = PRODUCTS;
 
-  getBooks(): IBook[] {
-    return this.products;
+  getBooks(): Observable<IBook[]> {
+    return of(this.products);
   }
 
   constructor() {}

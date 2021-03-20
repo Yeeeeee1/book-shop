@@ -1,7 +1,7 @@
 <div *ngIf="basketData.length > 0; else emptyBlock">
   <div
     class="book-wrapper"
-    *ngFor="let book of basketData | async; let index = index"
+    *ngFor="let book of basketData; let index = index"
     appChangeBackground
   >
     <button (click)="removeBook(index)">Delete</button>
