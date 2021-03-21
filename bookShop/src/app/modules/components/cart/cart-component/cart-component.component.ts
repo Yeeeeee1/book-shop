@@ -29,11 +29,6 @@ export class CartComponentComponent {
 
   sort(): void {
     this.flag = !this.flag;
-    this.basketData = this.orderbypipe.transform(
-      this.basketData,
-      this.selectedOption,
-      this.flag
-    );
   }
 
   constructor(private cartService: CartService) {

@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit {
   title = 'bookShop';
   @ViewChild('appTitle', { static: false })
   pRef!: ElementRef;
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     this.cartService.clickEvent.subscribe((data) => (this.basketData = data));
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.pRef.nativeElement.textContent = 'bookShop';
   }
 

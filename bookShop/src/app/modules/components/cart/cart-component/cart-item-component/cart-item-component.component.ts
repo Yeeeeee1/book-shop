@@ -8,6 +8,12 @@ import { CartService } from '../../../../../core/services/cart.service';
   styleUrls: ['./cart-item-component.component.scss'],
 })
 export class CartItemComponentComponent {
+  @Input()
+  flag!: boolean;
+
+  @Input()
+  term!: keyof IBook;
+
   basketData: IBook[] = [];
   constructor(private cartService: CartService) {
     this.cartService.clickEvent.subscribe((data) => (this.basketData = data));

@@ -1,6 +1,6 @@
 <div
   class="book-wrapper"
-  *ngFor="let book of bookData | async"
+  *ngFor="let book of bookData$ | async"
   [style.background]="book.isAvailable ? '' : 'grey'"
 >
   <h1>{{ book.name }}</h1>

@@ -7,7 +7,6 @@ import { IBook } from '../models/BookModel';
 export class OrderByPipe implements PipeTransform {
   transform(value: IBook[], term: keyof IBook, flag: boolean = false): IBook[] {
     function compare(a: IBook, b: IBook): number {
-      console.log(term);
       if (a[term] > b[term]) {
         return flag ? -1 : 1;
       }
