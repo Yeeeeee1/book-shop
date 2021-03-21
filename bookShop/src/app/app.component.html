@@ -1,9 +1,6 @@
 <h1 #appTitle class="title"></h1>
 
-<app-book-component
-  [bookData]="bookData"
-  (buyEvent)="onBuy($event)"
-></app-book-component>
+<app-book-component (buyEvent)="onBuy($event)"></app-book-component>
 <app-cart-component></app-cart-component>
 
 <app-about-component></app-about-component>

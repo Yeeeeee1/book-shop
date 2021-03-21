@@ -1,5 +1,13 @@
 <h1>Корзина</h1>
 
+<button (click)="sort()">Sort</button>
+
+<select [(ngModel)]="selectedOption">
+  <option value="price">Price</option>
+  <option value="count">Count</option>
+  <option value="name">Name</option>
+</select>
+
 <button (click)="removeAll()" appChangeOnclickElement [color]="'red'">
   Remove all
 </button>
@@ -8,4 +16,7 @@
 
 <h1>Quantity: {{ totalQuantity }}</h1>
 
-<app-cart-item-component></app-cart-item-component>
+<app-cart-item-component
+  [flag]="flag"
+  [term]="selectedOption"
+></app-cart-item-component>
