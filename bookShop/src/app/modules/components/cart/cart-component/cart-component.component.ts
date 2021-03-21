@@ -15,9 +15,6 @@ import { OrderByPipe } from '../../../../shared/pipes/order-by.pipe';
   styleUrls: ['./cart-component.component.scss'],
 })
 export class CartComponentComponent implements OnInit {
-  @ViewChild('select')
-  el!: ElementRef;
-
   orderbypipe = new OrderByPipe();
 
   totalQuantity = 0;

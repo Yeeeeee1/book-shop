@@ -78,6 +78,5 @@ export class CartService {
     this.clickSumEvent.emit(this.totalSum);
     this.clickQuantityEvent.emit(this.totalQuantity);
     this.removeEvent.emit(this.booksData);
-    console.log(this.basketData);
   }
 }

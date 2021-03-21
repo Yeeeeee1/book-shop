@@ -23,8 +23,6 @@ export class BookComponentComponent implements OnInit {
     this.bookData = this.booksService.getBooks();
   }
 
-  ngOnInit(): void {}
-
   onBuy(book: IBook): void {
     this.buyEvent.emit(book);
     book.isAvailable = false;

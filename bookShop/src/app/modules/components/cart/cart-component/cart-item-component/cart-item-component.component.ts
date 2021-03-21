@@ -13,8 +13,6 @@ export class CartItemComponentComponent implements OnInit {
     this.cartService.clickEvent.subscribe((cnt) => (this.basketData = cnt));
   }
 
-  ngOnInit(): void {}
-
   onChangeInput(): void {
     this.cartService.onChangeInput();
   }
