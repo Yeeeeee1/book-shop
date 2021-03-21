@@ -14,7 +14,7 @@ import { OrderByPipe } from '../../../../shared/pipes/order-by.pipe';
   templateUrl: './cart-component.component.html',
   styleUrls: ['./cart-component.component.scss'],
 })
-export class CartComponentComponent implements OnInit {
+export class CartComponentComponent {
   orderbypipe = new OrderByPipe();
 
   totalQuantity = 0;
@@ -38,13 +38,11 @@ export class CartComponentComponent implements OnInit {
 
   constructor(private cartService: CartService) {
     this.cartService.clickQuantityEvent.subscribe(
-      (cnt) => (this.totalQuantity = cnt)
+      (data) => (this.totalQuantity = data)
     );
-    this.cartService.clickSumEvent.subscribe((cnt) => (this.totalSum = cnt));
-    this.cartService.clickEvent.subscribe((cnt) => (this.basketData = cnt));
+    this.cartService.clickSumEvent.subscribe((data) => (this.totalSum = data));
+    this.cartService.clickEvent.subscribe((data) => (this.basketData = data));
   }
-
-  ngOnInit(): void {}
 
   removeAll(): void {
     this.cartService.removeAll();

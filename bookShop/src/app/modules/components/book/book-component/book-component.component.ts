@@ -15,12 +15,12 @@ import { IBook, Category } from '../../../../shared/models/BookModel';
   templateUrl: './book-component.component.html',
   styleUrls: ['./book-component.component.scss'],
 })
-export class BookComponentComponent implements OnInit {
-  bookData: Observable<IBook[]>;
+export class BookComponentComponent {
+  bookData$: Observable<IBook[]>;
 
   @Output() buyEvent = new EventEmitter<IBook>();
   constructor(private booksService: BooksService) {
-    this.bookData = this.booksService.getBooks();
+    this.bookData$ = this.booksService.getBooks();
   }
 
   onBuy(book: IBook): void {

@@ -7,10 +7,10 @@ import { CartService } from '../../../../../core/services/cart.service';
   templateUrl: './cart-item-component.component.html',
   styleUrls: ['./cart-item-component.component.scss'],
 })
-export class CartItemComponentComponent implements OnInit {
+export class CartItemComponentComponent {
   basketData: IBook[] = [];
   constructor(private cartService: CartService) {
-    this.cartService.clickEvent.subscribe((cnt) => (this.basketData = cnt));
+    this.cartService.clickEvent.subscribe((data) => (this.basketData = data));
   }
 
   onChangeInput(): void {

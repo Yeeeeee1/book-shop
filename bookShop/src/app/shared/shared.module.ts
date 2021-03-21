@@ -13,7 +13,7 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     ChangeOnclickElementDirective,
     OrderByPipe,
   ],
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, FormsModule, CommonModule, OrdersModule],
   exports: [
     CommonModule,
     OrdersModule,
