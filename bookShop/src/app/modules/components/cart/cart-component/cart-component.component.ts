@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { CartService } from '../../../../core/services/cart.service';
 import { IBook } from '../../../../shared/models/BookModel';
-import { OrderByPipe } from '../../../../shared/pipes/order-by.pipe';
 
 @Component({
   selector: 'app-cart-component',
@@ -15,8 +14,6 @@ import { OrderByPipe } from '../../../../shared/pipes/order-by.pipe';
   styleUrls: ['./cart-component.component.scss'],
 })
 export class CartComponentComponent {
-  orderbypipe = new OrderByPipe();
-
   totalQuantity = 0;
 
   totalSum = 0;
