@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { BooksService } from 'src/app/core/services/books.service';
 import { IBook, Category } from 'src/app/shared/models/BookModel';
 import { CartService } from '../../../../../core/services/cart.service';
 
@@ -7,7 +9,7 @@ import { CartService } from '../../../../../core/services/cart.service';
   templateUrl: './cart-item-component.component.html',
   styleUrls: ['./cart-item-component.component.scss'],
 })
-export class CartItemComponentComponent {
+export class CartItemComponentComponent implements OnInit {
   @Input()
   flag!: boolean;
 
@@ -15,8 +17,21 @@ export class CartItemComponentComponent {
   term!: keyof IBook;
 
   basketData: IBook[] = [];
-  constructor(private cartService: CartService) {
+  constructor(
+    private cartService: CartService,
+    private route: ActivatedRoute,
+    private booksService: BooksService
+  ) {
     this.cartService.clickEvent.subscribe((data) => (this.basketData = data));
+  }
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((param) => {
+      const id = param.get('id');
+      if (id !== null) {
+        this.basketData.push(this.booksService.products[Number(id)]);
+      }
+    });
   }
 
   onChangeInput(): void {

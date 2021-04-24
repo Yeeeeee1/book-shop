@@ -1,6 +1,12 @@
 <h1 #appTitle class="title"></h1>
 
-<app-book-component (buyEvent)="onBuy($event)"></app-book-component>
+<nav>
+  <a routerLink="product" [queryParams]="{ id: 0 }">Go to card</a>
+</nav>
+
+<router-outlet></router-outlet>
+
+<!-- <app-book-component (buyEvent)="onBuy($event)"></app-book-component>
 <app-cart-component></app-cart-component>
 
-<app-about-component></app-about-component>
+<app-about-component></app-about-component> -->
