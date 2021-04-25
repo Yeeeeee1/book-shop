@@ -2,7 +2,6 @@
   class="book-wrapper"
   *ngFor="let book of bookData$ | async; let index = index"
   [style.background]="book.isAvailable ? '' : 'grey'"
-  (click)="showCard(index)"
 >
   <h1>{{ book.name }}</h1>
   <p>{{ book.description }}</p>
@@ -14,4 +13,5 @@
     [(ngModel)]="book.count"
     [disabled]="!book.isAvailable"
   />
+  <a [routerLink]="'product/' + index">See the cart</a>
 </div>

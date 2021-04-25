@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BooksService } from 'src/app/core/services/books.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { IBook, Category } from 'src/app/shared/models/BookModel';
 import { CartService } from '../../../../../core/services/cart.service';
 
@@ -20,7 +21,8 @@ export class CartItemComponentComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private route: ActivatedRoute,
-    private booksService: BooksService
+    private booksService: BooksService,
+    private localStorageService: LocalStorageService
   ) {
     this.cartService.clickEvent.subscribe((data) => (this.basketData = data));
   }
@@ -32,6 +34,10 @@ export class CartItemComponentComponent implements OnInit {
         this.basketData.push(this.booksService.products[Number(id)]);
       }
     });
+
+    if (this.localStorageService.getItem('basketData')) {
+      this.basketData = this.localStorageService.getItem('basketData');
+    }
   }
 
   onChangeInput(): void {
@@ -48,6 +54,5 @@ export class CartItemComponentComponent implements OnInit {
 
   removeBook(id: number): void {
     this.cartService.removeBook(id);
-    console.log(this.basketData);
   }
 }

@@ -29,8 +29,4 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.pRef.nativeElement.textContent = 'bookShop';
   }
-
-  onBuy(book: IBook): void {
-    this.cartService.addBook(book);
-  }
 }

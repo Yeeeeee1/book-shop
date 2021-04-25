@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { IBook, Category } from '../../shared/models/BookModel';
 import { BooksService } from './books.service';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +23,11 @@ export class CartService {
 
   totalSum = 0;
 
-  constructor(private booksService: BooksService) {
-    this.booksService.getBooks().subscribe((n) => (this.booksData = n));
+  constructor(
+    private booksService: BooksService,
+    private localStorageService: LocalStorageService
+  ) {
+    this.booksService.getBooks().subscribe((data) => (this.booksData = data));
   }
 
   onChangeInput(): void {
@@ -32,6 +36,8 @@ export class CartService {
 
   increaseQuantity(book: IBook): void {
     book.count++;
+    this.booksData[book.id] = book;
+    this.basketData[book.id] = book;
     this.updateCartData();
   }
 
@@ -51,6 +57,8 @@ export class CartService {
   }
 
   removeBook(id: number): void {
+    this.basketData = this.localStorageService.getItem('basketData');
+    this.booksData = this.localStorageService.getItem('booksData');
     this.booksData[this.basketData[id].id].isAvailable = true;
     this.basketData.splice(id, 1);
     this.updateCartData();
@@ -58,7 +66,7 @@ export class CartService {
 
   addBook(book: IBook): void {
     this.basketData.push(book);
-    console.log(this.basketData);
+    this.booksData[book.id] = book;
     this.updateCartData();
   }
 
@@ -74,6 +82,10 @@ export class CartService {
         (accumulator + currentValue.price) * currentValue.count,
       0
     );
+    this.localStorageService.setItem('totalQuantity', this.totalQuantity);
+    this.localStorageService.setItem('totalSum', this.totalSum);
+    this.localStorageService.setItem('basketData', this.basketData);
+    this.localStorageService.setItem('booksData', this.booksData);
     this.clickEvent.emit(this.basketData);
     this.clickSumEvent.emit(this.totalSum);
     this.clickQuantityEvent.emit(this.totalQuantity);

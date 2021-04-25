@@ -13,7 +13,7 @@
     <input
       placeholder="Count"
       [(ngModel)]="book.count"
-      (change)="onChangeInput()"
+      (input)="onChangeInput()"
     />
     <i class="material-icons" (click)="increaseQuantity(book)">arrow_upward</i>
     <i class="material-icons" (click)="decreaseQuantity(book)"

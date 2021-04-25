@@ -1,35 +1,38 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BooksService } from 'src/app/core/services/books.service';
-import { IBook, Category } from '../../../../shared/models/BookModel';
-import { Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { IBook } from '../../../../shared/models/BookModel';
+import { of } from 'rxjs';
+import { CartService } from 'src/app/core/services/cart.service';
 
 @Component({
   selector: 'app-book-component',
   templateUrl: './book-component.component.html',
   styleUrls: ['./book-component.component.scss'],
 })
-export class BookComponentComponent {
-  bookData$: Observable<IBook[]>;
+export class BookComponentComponent implements OnInit {
+  bookData$: Observable<IBook[]> = this.booksService.getBooks();
 
   @Output() buyEvent = new EventEmitter<IBook>();
-  constructor(private booksService: BooksService, private router: Router) {
-    this.bookData$ = this.booksService.getBooks();
+  constructor(
+    private booksService: BooksService,
+    private localStorageService: LocalStorageService,
+    private cartService: CartService
+  ) {
+    this.cartService.removeEvent.subscribe(
+      (data) => (this.bookData$ = of(data))
+    );
   }
 
-  showCard(id: number): void {
-    this.router.navigate([`product/`, `${id}`]);
+  ngOnInit(): void {
+    if (this.localStorageService.getItem('booksData')[0] !== undefined) {
+      this.bookData$ = of(this.localStorageService.getItem('booksData'));
+    }
   }
 
   onBuy(book: IBook): void {
-    this.buyEvent.emit(book);
     book.isAvailable = false;
+    this.cartService.addBook(book);
   }
 }
