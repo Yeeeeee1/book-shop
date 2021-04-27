@@ -9,21 +9,20 @@ import { AboutComponentComponent } from './modules/components/about-component/ab
 import { SharedModule } from './shared/shared.module';
 import { BookModule } from './modules/components/book/book.module';
 import { CartModule } from './modules/components/cart/cart.module';
+import { OrdersModule } from './modules/components/order/orders.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AboutComponentComponent
-  ],
+  declarations: [AppComponent, AboutComponentComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     SharedModule,
     BookModule,
-    CartModule
+    CartModule,
+    OrdersModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
