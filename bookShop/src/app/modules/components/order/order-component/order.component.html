@@ -1,5 +1,15 @@
-<form (submit)="sendData()">
-  <input type="name" placeholder="Enter name" />
-  <input type="email" placeholder="Enter email" />
+<form (submit)="sendData()" [formGroup]="orderForm">
+  <input type="name" placeholder="Enter name" formControlName="name" />
+  <div *ngIf="isControlInvalid('name')">Enter the whole data</div>
+  <input type="email" placeholder="Enter email" formControlName="email" />
+  <div *ngIf="isControlInvalid('email')">Enter the whole data</div>
+  <input type="text" placeholder="Enter address" formControlName="address" />
+  <div *ngIf="isControlInvalid('address')">Enter the whole data</div>
+  <input type="text" placeholder="Enter comment" formControlName="comment" />
+  <div *ngIf="isControlInvalid('comment')">Enter the whole data</div>
+  <select (change)="chooseBuyWay($event.target)" formControlName="buyWay">
+    <option value="nal" selected>Наличными</option>
+    <option value="beznal">Картой</option>
+  </select>
   <input type="submit" />
 </form>

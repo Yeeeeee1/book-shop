@@ -10,6 +10,8 @@ import { SharedModule } from './shared/shared.module';
 import { BookModule } from './modules/components/book/book.module';
 import { CartModule } from './modules/components/cart/cart.module';
 import { OrdersModule } from './modules/components/order/orders.module';
+import { AdminComponent } from './modules/components/admin/admin-component/admin.component';
+import { AdminModule } from './modules/components/admin/admin.module';
 
 @NgModule({
   declarations: [AppComponent, AboutComponentComponent],
@@ -21,6 +23,7 @@ import { OrdersModule } from './modules/components/order/orders.module';
     BookModule,
     CartModule,
     OrdersModule,
+    AdminModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
