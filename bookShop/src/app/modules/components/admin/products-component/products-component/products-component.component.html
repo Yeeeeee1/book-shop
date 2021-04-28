@@ -8,4 +8,5 @@
   <p>{{ book.description }}</p>
   <h2>{{ book.price | currency }}</h2>
   <h3>{{ book.category }}</h3>
+  <a [routerLink]="'edit/' + index">Change</a>
 </div>

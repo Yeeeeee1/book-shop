@@ -30,5 +30,6 @@ export class AddProductComponent implements OnInit {
       .getBooks()
       .subscribe((data) => (this.book.id = data[data.length - 1].id + 1));
     this.booksService.addBook(this.book);
+    alert('Продукт добавлен!');
   }
 }
