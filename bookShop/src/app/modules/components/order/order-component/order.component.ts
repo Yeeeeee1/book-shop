@@ -66,7 +66,7 @@ export class OrderComponent implements OnInit {
   }
 
   chooseBuyWay(target: EventTarget | null): void {
-    this.buyWay = (<HTMLSelectElement>target).value;
+    this.buyWay = (target as HTMLSelectElement).value;
     console.log(this.buyWay);
   }
 
@@ -81,7 +81,7 @@ export class OrderComponent implements OnInit {
       return;
     }
 
-    let orderDataObj: IOrderData = {
+    const orderDataObj: IOrderData = {
       name: this.orderForm.value.name,
       email: this.orderForm.value.email,
       address: this.orderForm.value.address,

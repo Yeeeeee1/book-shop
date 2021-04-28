@@ -1,6 +1,6 @@
 import { FormGroup } from '@angular/forms';
 
-interface valueObj {
+interface ValueObj {
   name: string;
   email: string;
   address: string;
@@ -9,5 +9,5 @@ interface valueObj {
 }
 
 export interface IOrderForm extends FormGroup {
-  value: valueObj;
+  value: ValueObj;
 }
