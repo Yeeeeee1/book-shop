@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminGuard } from 'src/app/shared/guards/admin.guard';
 import { CartComponentComponent } from '../cart/cart-component/cart-component.component';
 import { AddProductComponent } from './add-product/add-product/add-product.component';
 
@@ -11,6 +12,7 @@ import { ProductsComponentComponent } from './products-component/products-compon
 const routes: Routes = [
   {
     path: '',
+    canActivate: [AdminGuard],
     children: [
       {
         path: '',

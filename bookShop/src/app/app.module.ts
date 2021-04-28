@@ -12,6 +12,7 @@ import { CartModule } from './modules/components/cart/cart.module';
 import { OrdersModule } from './modules/components/order/orders.module';
 import { AdminComponent } from './modules/components/admin/admin-component/admin.component';
 import { AdminModule } from './modules/components/admin/admin.module';
+import { AdminGuard } from './shared/guards/admin.guard';
 
 @NgModule({
   declarations: [AppComponent, AboutComponentComponent],
@@ -25,7 +26,7 @@ import { AdminModule } from './modules/components/admin/admin.module';
     OrdersModule,
     AdminModule,
   ],
-  providers: [],
+  providers: [AdminGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
