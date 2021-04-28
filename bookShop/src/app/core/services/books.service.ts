@@ -49,5 +49,9 @@ export class BooksService {
     return of(this.products);
   }
 
+  addBook(book: IBook): void {
+    this.products.push(book);
+  }
+
   constructor() {}
 }

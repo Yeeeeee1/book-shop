@@ -1,0 +1,12 @@
+<button (click)="save()">Save</button>
+
+<div>
+  <input type="text" placeholder="Enter name" [(ngModel)]="book.name" />
+  <input
+    type="text"
+    placeholder="Enter description"
+    [(ngModel)]="book.description"
+  />
+  <input type="text" placeholder="Enter price" [(ngModel)]="book.price" />
+  <input type="text" placeholder="Enter category" [(ngModel)]="book.category" />
+</div>

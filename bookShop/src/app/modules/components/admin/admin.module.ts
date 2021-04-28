@@ -6,12 +6,14 @@ import { AdminComponent } from './admin-component/admin.component';
 import { AdminRoutingModule } from './admin.routing.module';
 import { OrderListComponent } from './order-component/order-list/order-list.component';
 import { ProductsComponentComponent } from './products-component/products-component/products-component.component';
+import { AddProductComponent } from './add-product/add-product/add-product.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
     OrderListComponent,
     ProductsComponentComponent,
+    AddProductComponent,
   ],
   imports: [FormsModule, AdminRoutingModule, CommonModule],
   exports: [AdminComponent],
