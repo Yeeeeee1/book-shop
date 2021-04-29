@@ -18,9 +18,9 @@ import { IBook } from '../../../../shared/models/BookModel';
   styleUrls: ['./cart-component.component.scss'],
 })
 export class CartComponentComponent implements OnInit {
-  totalQuantity = this.localStorageService.getItem('totalQuantity') || 0;
+  totalQuantity = 0;
 
-  totalSum = this.localStorageService.getItem('totalSum') || 0;
+  totalSum = 0;
 
   basketData: IBook[] = [];
 
@@ -46,6 +46,12 @@ export class CartComponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (typeof this.localStorageService.getItem('totalSum') !== 'object') {
+      this.totalSum = this.localStorageService.getItem('totalSum');
+    }
+    if (typeof this.localStorageService.getItem('totalQuantity') !== 'object') {
+      this.totalQuantity = this.localStorageService.getItem('totalQuantity');
+    }
     this.route.paramMap.subscribe((param) => {
       const id = param.get('id');
       if (id !== null) {

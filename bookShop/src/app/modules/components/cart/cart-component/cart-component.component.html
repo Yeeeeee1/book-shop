@@ -24,6 +24,4 @@
 
 <ng-template #emptyBlock>You not bought anything</ng-template>
 
-<a routerLink="/order" [style.display]="basketData.length === 0 ? 'none' : ''"
-  >Сделать заказ</a
->
+<a routerLink="/order" *ngIf="basketData[0]">Сделать заказ</a>

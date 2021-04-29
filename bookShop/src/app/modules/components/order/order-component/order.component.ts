@@ -31,7 +31,6 @@ export class OrderComponent implements OnInit {
       this.localStorageService.getItem('orderData')[0] === undefined
         ? []
         : this.localStorageService.getItem('orderData');
-    console.log(this.orderData);
     this.basketData = this.localStorageService.getItem('basketData');
   }
 
@@ -67,7 +66,6 @@ export class OrderComponent implements OnInit {
 
   chooseBuyWay(target: EventTarget | null): void {
     this.buyWay = (target as HTMLSelectElement).value;
-    console.log(this.buyWay);
   }
 
   sendData(): void {

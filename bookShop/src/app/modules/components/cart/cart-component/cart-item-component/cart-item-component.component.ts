@@ -35,7 +35,7 @@ export class CartItemComponentComponent implements OnInit {
       }
     });
 
-    if (this.localStorageService.getItem('basketData')) {
+    if (this.localStorageService.getItem('basketData')[0]) {
       this.basketData = this.localStorageService.getItem('basketData');
     }
   }

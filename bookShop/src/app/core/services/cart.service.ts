@@ -37,13 +37,15 @@ export class CartService {
   increaseQuantity(book: IBook): void {
     book.count++;
     this.booksData[book.id] = book;
-    this.basketData[book.id] = book;
+    this.basketData[this.basketData.indexOf(book)] = book;
     this.updateCartData();
   }
 
   decreaseQuantity(book: IBook): void {
     if (book.count > 0) {
       book.count--;
+      this.booksData[book.id] = book;
+      this.basketData[this.basketData.indexOf(book)] = book;
       this.updateCartData();
     }
   }
@@ -77,17 +79,16 @@ export class CartService {
         0
       )
     );
-    this.totalSum = this.basketData.reduce(
-      (accumulator, currentValue) =>
-        (accumulator + currentValue.price) * currentValue.count,
-      0
-    );
+    let currentCost = 0;
+    for (const book of this.basketData) {
+      currentCost += book.count * book.price;
+    }
     this.localStorageService.setItem('totalQuantity', this.totalQuantity);
-    this.localStorageService.setItem('totalSum', this.totalSum);
+    this.localStorageService.setItem('totalSum', currentCost);
     this.localStorageService.setItem('basketData', this.basketData);
     this.localStorageService.setItem('booksData', this.booksData);
     this.clickEvent.emit(this.basketData);
-    this.clickSumEvent.emit(this.totalSum);
+    this.clickSumEvent.emit(currentCost);
     this.clickQuantityEvent.emit(this.totalQuantity);
     this.removeEvent.emit(this.booksData);
   }

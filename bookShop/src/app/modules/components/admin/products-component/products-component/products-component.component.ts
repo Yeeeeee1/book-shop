@@ -20,6 +20,7 @@ export class ProductsComponentComponent implements OnInit {
   ngOnInit(): void {
     if (this.localStorageService.getItem('booksData')[0] !== undefined) {
       this.bookData$ = of(this.localStorageService.getItem('booksData'));
+      this.bookData$.subscribe((data) => console.log(data));
     }
   }
 }

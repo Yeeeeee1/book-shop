@@ -14,7 +14,5 @@ export class OrderListComponent implements OnInit {
     this.orderData = this.localStorageService.getItem('orderData');
   }
 
-  ngOnInit(): void {
-    console.log(this.orderData);
-  }
+  ngOnInit(): void {}
 }
