@@ -18,6 +18,10 @@ export class CartComponentComponent implements OnInit, OnDestroy {
   flag = false;
   selectedOption: keyof IBook = 'price';
 
+  cartServiceQuantitySub: Subscription | null = new Subscription();
+  cartServiceSumSub: Subscription | null = new Subscription();
+  cartServiceCartData: Subscription | null = new Subscription();
+
   paramSub: Subscription | null = new Subscription();
   booksDataSub: Subscription | null = new Subscription();
 
@@ -34,7 +38,15 @@ export class CartComponentComponent implements OnInit, OnDestroy {
     this.booksDataSub = this.booksService
       .getBooks()
       .subscribe((data) => (this.booksData = data));
-
+    this.cartServiceQuantitySub = this.cartService.clickQuantityEvent.subscribe(
+      (data) => (this.totalQuantity = data)
+    );
+    this.cartServiceSumSub = this.cartService.clickSumEvent.subscribe(
+      (data) => (this.totalSum = data)
+    );
+    this.cartServiceCartData = this.cartService.cartChangeEvent.subscribe(
+      (data) => (this.basketData = data)
+    );
     this.paramSub = this.route.paramMap.subscribe((param) => {
       const id = param.get('id');
       if (id !== null) {
@@ -51,6 +63,18 @@ export class CartComponentComponent implements OnInit, OnDestroy {
     if (this.paramSub) {
       this.paramSub.unsubscribe();
       this.paramSub = null;
+    }
+    if (this.cartServiceQuantitySub) {
+      this.cartServiceQuantitySub.unsubscribe();
+      this.cartServiceQuantitySub = null;
+    }
+    if (this.cartServiceSumSub) {
+      this.cartServiceSumSub.unsubscribe();
+      this.cartServiceSumSub = null;
+    }
+    if (this.cartServiceCartData) {
+      this.cartServiceCartData.unsubscribe();
+      this.cartServiceCartData = null;
     }
   }
 

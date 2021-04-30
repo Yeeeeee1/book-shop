@@ -5,6 +5,12 @@ import { IBook } from '../../shared/models/BookModel';
   providedIn: 'root',
 })
 export class CartService {
+  clickSumEvent: EventEmitter<number> = new EventEmitter();
+
+  clickQuantityEvent: EventEmitter<number> = new EventEmitter();
+
+  cartChangeEvent: EventEmitter<IBook[]> = new EventEmitter();
+
   basketData: IBook[] = [];
 
   totalQuantity = 0;
@@ -59,7 +65,7 @@ export class CartService {
   updateCartData(): void {
     this.totalQuantity = Number(
       this.basketData.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.count,
+        (accumulator, currentValue) => accumulator + Number(currentValue.count),
         0
       )
     );
@@ -68,5 +74,8 @@ export class CartService {
       currentCost += book.count * book.price;
     }
     this.totalSum = currentCost;
+    this.clickSumEvent.emit(this.totalSum);
+    this.clickQuantityEvent.emit(this.totalQuantity);
+    this.cartChangeEvent.emit(this.basketData);
   }
 }
