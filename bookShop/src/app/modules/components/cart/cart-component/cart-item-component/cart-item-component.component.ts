@@ -18,7 +18,7 @@ import { CartService } from '../../../../../core/services/cart.service';
   templateUrl: './cart-item-component.component.html',
   styleUrls: ['./cart-item-component.component.scss'],
 })
-export class CartItemComponentComponent {
+export class CartItemComponentComponent implements OnInit {
   @Input()
   flag!: boolean;
   @Input()
@@ -28,7 +28,20 @@ export class CartItemComponentComponent {
 
   @Output() removeBookEvent = new EventEmitter<number>();
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private route: ActivatedRoute,
+    private booksService: BooksService
+  ) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((param) => {
+      const id = param.get('id');
+      if (id !== null) {
+        this.basketData.push(this.booksService.products[Number(id)]);
+      }
+    });
+  }
 
   onChangeInput(): void {
     this.cartService.onChangeInput();
