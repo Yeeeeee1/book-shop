@@ -1,4 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BooksService } from 'src/app/core/services/books.service';
@@ -11,50 +18,17 @@ import { CartService } from '../../../../../core/services/cart.service';
   templateUrl: './cart-item-component.component.html',
   styleUrls: ['./cart-item-component.component.scss'],
 })
-export class CartItemComponentComponent implements OnInit, OnDestroy {
+export class CartItemComponentComponent {
   @Input()
   flag!: boolean;
-
   @Input()
   term!: keyof IBook;
+  @Input() basketData: IBook[] = [];
+  @Input() booksData: IBook[] = [];
 
-  cartSub: Subscription | null = new Subscription();
-  paramSub: Subscription | null = new Subscription();
+  @Output() removeBookEvent = new EventEmitter<number>();
 
-  basketData: IBook[] = [];
-  constructor(
-    private cartService: CartService,
-    private route: ActivatedRoute,
-    private booksService: BooksService,
-    private localStorageService: LocalStorageService
-  ) {}
-
-  ngOnInit(): void {
-    this.cartSub = this.cartService.clickEvent.subscribe(
-      (data) => (this.basketData = data)
-    );
-    this.paramSub = this.route.paramMap.subscribe((param) => {
-      const id = param.get('id');
-      if (id !== null) {
-        this.basketData.push(this.booksService.products[Number(id)]);
-      }
-    });
-
-    if (this.localStorageService.getItem('basketData')[0]) {
-      this.basketData = this.localStorageService.getItem('basketData');
-    }
-  }
-
-  ngOnDestroy(): void {
-    if (this.cartSub) {
-      this.cartSub.unsubscribe();
-      this.cartSub = null;
-    }
-    if (this.paramSub) {
-      this.paramSub.unsubscribe();
-      this.paramSub = null;
-    }
-  }
+  constructor(private cartService: CartService) {}
 
   onChangeInput(): void {
     this.cartService.onChangeInput();
@@ -69,6 +43,6 @@ export class CartItemComponentComponent implements OnInit, OnDestroy {
   }
 
   removeBook(id: number): void {
-    this.cartService.removeBook(id);
+    this.removeBookEvent.emit(id);
   }
 }
