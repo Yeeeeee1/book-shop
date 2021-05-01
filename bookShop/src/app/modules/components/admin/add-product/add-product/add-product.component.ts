@@ -1,4 +1,6 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, Subscription, SubscriptionLike } from 'rxjs';
 import { BooksService } from 'src/app/core/services/books.service';
 import { CartService } from 'src/app/core/services/cart.service';
@@ -23,7 +25,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   dataSub: Subscription | null = new Subscription();
 
-  constructor(private booksService: BooksService) {}
+  constructor(private booksService: BooksService, private router: Router) {}
 
   ngOnInit(): void {
     this.dataSub = this.booksService
@@ -42,5 +44,6 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.book.createDate = Date.now();
     this.booksService.addBook(this.book);
     alert('Продукт добавлен!');
+    this.router.navigate([``]);
   }
 }

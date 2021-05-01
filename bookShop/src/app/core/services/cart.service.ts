@@ -43,7 +43,10 @@ export class CartService {
     }
   }
 
-  removeAll(): void {
+  removeAll(booksData: IBook[]): void {
+    for (const book of this.basketData) {
+      booksData[book.id].isAvailable = true;
+    }
     this.basketData = [];
     this.updateCartData();
   }

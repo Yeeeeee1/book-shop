@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { OrderService } from 'src/app/core/services/order.service';
 import { IOrderData } from '../../../order/models/orderDataModel';
 
 @Component({
@@ -8,11 +9,11 @@ import { IOrderData } from '../../../order/models/orderDataModel';
   styleUrls: ['./order-list.component.scss'],
 })
 export class OrderListComponent implements OnInit {
-  orderData!: any[];
+  orderData!: IOrderData[];
 
-  constructor(private localStorageService: LocalStorageService) {
-    this.orderData = this.localStorageService.getItem('orderData');
+  constructor(private orderService: OrderService) {}
+
+  ngOnInit(): void {
+    this.orderData = this.orderService.getOrders();
   }
-
-  ngOnInit(): void {}
 }

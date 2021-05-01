@@ -31,7 +31,8 @@ export class EditComponentComponent implements OnInit, OnDestroy {
   constructor(
     private booksService: BooksService,
     private route: ActivatedRoute,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -57,7 +58,7 @@ export class EditComponentComponent implements OnInit, OnDestroy {
   save(): void {
     this.booksService.products[this.id] = this.book;
     this.localStorageService.setItem('booksData', this.booksService.products);
-    console.log(this.booksService.products);
     alert('Изменения приняты!');
+    this.router.navigate([``]);
   }
 }

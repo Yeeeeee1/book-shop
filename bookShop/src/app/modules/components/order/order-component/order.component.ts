@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { BooksService } from 'src/app/core/services/books.service';
 import { CartService } from 'src/app/core/services/cart.service';
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { OrderService } from 'src/app/core/services/order.service';
 import { IBook } from 'src/app/shared/models/BookModel';
 import { IOrderData } from '../models/orderDataModel';
 import { IOrderForm } from '../models/orderFormModel';
@@ -12,26 +14,33 @@ import { IOrderForm } from '../models/orderFormModel';
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss'],
 })
-export class OrderComponent implements OnInit {
+export class OrderComponent implements OnInit, OnDestroy {
   basketData: IBook[] = [];
+  booksData: IBook[] = [];
   buyWay = '';
   orderForm!: IOrderForm;
-  orderData: IOrderData[] = [];
+
+  booksDataSub: Subscription | null = new Subscription();
 
   constructor(
-    private localStorageService: LocalStorageService,
     private cartService: CartService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private orderService: OrderService,
+    private booksService: BooksService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
-    this.orderData =
-      this.localStorageService.getItem('orderData')[0] === undefined
-        ? []
-        : this.localStorageService.getItem('orderData');
-    this.basketData = this.localStorageService.getItem('basketData');
+    this.basketData = this.cartService.getBasketData();
+    this.booksService.getBooks().subscribe((data) => (this.booksData = data));
+  }
+
+  ngOnDestroy(): void {
+    if (this.booksDataSub) {
+      this.booksDataSub.unsubscribe();
+      this.booksDataSub = null;
+    }
   }
 
   initForm(): void {
@@ -87,13 +96,9 @@ export class OrderComponent implements OnInit {
       buyWay: this.orderForm.value.buyWay,
     };
 
-    this.orderData.push(orderDataObj);
+    this.orderService.addOrder(orderDataObj);
 
-    this.localStorageService.setItem('orderData', this.orderData);
-
-    this.basketData = [];
-    this.localStorageService.removeItem('basketData');
-    this.cartService.removeAll();
+    this.cartService.removeAll(this.booksData);
     alert('Заказ выполнен!');
     this.router.navigate(['']);
   }

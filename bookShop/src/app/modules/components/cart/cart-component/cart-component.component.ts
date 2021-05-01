@@ -83,10 +83,7 @@ export class CartComponentComponent implements OnInit, OnDestroy {
   }
 
   removeAll(): void {
-    for (const book of this.basketData) {
-      this.booksData[book.id].isAvailable = true;
-    }
-    this.cartService.removeAll();
+    this.cartService.removeAll(this.booksData);
   }
 
   removeBook(id: number): void {
