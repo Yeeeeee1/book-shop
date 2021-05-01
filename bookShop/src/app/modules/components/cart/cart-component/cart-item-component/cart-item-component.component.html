@@ -1,9 +1,9 @@
 <div
   class="book-wrapper"
-  *ngFor="let book of basketData | orderBy: term:flag; let index = index"
+  *ngFor="let book of basketData | orderBy: term:flag; index as i"
   appChangeBackground
 >
-  <button (click)="removeBook(index)">Delete</button>
+  <button (click)="removeBook(i)">Delete</button>
   <h1>{{ book.name }}</h1>
   <p>{{ book.description }}</p>
   <h2>{{ book.price | currency }}</h2>
