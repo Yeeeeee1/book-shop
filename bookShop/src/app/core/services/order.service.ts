@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { IOrderData } from 'src/app/modules/components/order/models/orderDataModel';
 
 @Injectable({
@@ -6,13 +6,11 @@ import { IOrderData } from 'src/app/modules/components/order/models/orderDataMod
 })
 export class OrderService {
   orderData: IOrderData[] = [];
-  changeOrderDataEvent: EventEmitter<IOrderData[]> = new EventEmitter();
 
   constructor() {}
 
   addOrder(order: IOrderData): void {
     this.orderData.push(order);
-    this.changeOrderDataEvent.emit(this.orderData);
   }
 
   getOrders(): IOrderData[] {
