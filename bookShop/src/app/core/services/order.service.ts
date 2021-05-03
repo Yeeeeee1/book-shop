@@ -10,7 +10,8 @@ export class OrderService {
   constructor() {}
 
   addOrder(order: IOrderData): void {
-    this.orderData.push(order);
+    const newOrderData = [...this.orderData, order]; // or concat or something other simillar method
+    this.orderData = newOrderData;
   }
 
   getOrders(): IOrderData[] {
