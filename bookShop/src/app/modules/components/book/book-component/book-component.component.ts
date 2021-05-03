@@ -1,14 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BooksService } from 'src/app/core/services/books.service';
-import { IBook, Category } from '../../../../shared/models/BookModel';
+import { IBook } from '../../../../shared/models/BookModel';
+import { CartService } from 'src/app/core/services/cart.service';
 
 @Component({
   selector: 'app-book-component',
@@ -16,15 +10,16 @@ import { IBook, Category } from '../../../../shared/models/BookModel';
   styleUrls: ['./book-component.component.scss'],
 })
 export class BookComponentComponent {
-  bookData$: Observable<IBook[]>;
+  bookData$: Observable<IBook[]> = this.booksService.getBooks();
 
   @Output() buyEvent = new EventEmitter<IBook>();
-  constructor(private booksService: BooksService) {
-    this.bookData$ = this.booksService.getBooks();
-  }
+  constructor(
+    private booksService: BooksService,
+    private cartService: CartService
+  ) {}
 
   onBuy(book: IBook): void {
-    this.buyEvent.emit(book);
     book.isAvailable = false;
+    this.cartService.addBook(book);
   }
 }

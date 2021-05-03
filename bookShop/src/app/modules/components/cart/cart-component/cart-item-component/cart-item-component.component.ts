@@ -1,4 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { BooksService } from 'src/app/core/services/books.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { IBook, Category } from 'src/app/shared/models/BookModel';
 import { CartService } from '../../../../../core/services/cart.service';
 
@@ -7,16 +18,29 @@ import { CartService } from '../../../../../core/services/cart.service';
   templateUrl: './cart-item-component.component.html',
   styleUrls: ['./cart-item-component.component.scss'],
 })
-export class CartItemComponentComponent {
+export class CartItemComponentComponent implements OnInit {
   @Input()
   flag!: boolean;
-
   @Input()
   term!: keyof IBook;
+  @Input() basketData: IBook[] = [];
+  @Input() booksData: IBook[] = [];
 
-  basketData: IBook[] = [];
-  constructor(private cartService: CartService) {
-    this.cartService.clickEvent.subscribe((data) => (this.basketData = data));
+  @Output() removeBookEvent = new EventEmitter<number>();
+
+  constructor(
+    private cartService: CartService,
+    private route: ActivatedRoute,
+    private booksService: BooksService
+  ) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((param) => {
+      const id = param.get('id');
+      if (id !== null) {
+        this.basketData.push(this.booksService.products[Number(id)]);
+      }
+    });
   }
 
   onChangeInput(): void {
@@ -32,7 +56,6 @@ export class CartItemComponentComponent {
   }
 
   removeBook(id: number): void {
-    this.cartService.removeBook(id);
-    console.log(this.basketData);
+    this.removeBookEvent.emit(id);
   }
 }

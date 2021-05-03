@@ -1,0 +1,9 @@
+<a routerLink="add">Add product</a>
+
+<div class="book-wrapper" *ngFor="let book of bookData$ | async; index as i">
+  <h1>{{ book.name }}</h1>
+  <p>{{ book.description }}</p>
+  <h2>{{ book.price | currency }}</h2>
+  <h3>{{ book.category }}</h3>
+  <a [routerLink]="'edit/' + i">Change</a>
+</div>

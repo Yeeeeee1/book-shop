@@ -1,6 +1,17 @@
 <h1 #appTitle class="title"></h1>
 
-<app-book-component (buyEvent)="onBuy($event)"></app-book-component>
-<app-cart-component></app-cart-component>
+<header>
+  <nav>
+    <a
+      routerLink=""
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLinkActive="active"
+      >Main page</a
+    >
+    <a routerLink="cart" routerLinkActive="active">Go to basket</a>
+    <a routerLink="admin" routerLinkActive="active">Admin</a>
+    <a routerLink="admin/orders" routerLinkActive="active">Orders</a>
+  </nav>
+</header>
 
-<app-about-component></app-about-component>
+<router-outlet></router-outlet>

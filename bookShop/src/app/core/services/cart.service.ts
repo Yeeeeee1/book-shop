@@ -1,20 +1,15 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { IBook, Category } from '../../shared/models/BookModel';
-import { BooksService } from './books.service';
+import { IBook } from '../../shared/models/BookModel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  clickEvent: EventEmitter<IBook[]> = new EventEmitter();
-
   clickSumEvent: EventEmitter<number> = new EventEmitter();
 
   clickQuantityEvent: EventEmitter<number> = new EventEmitter();
 
-  removeEvent: EventEmitter<IBook[]> = new EventEmitter();
-
-  booksData!: IBook[];
+  cartChangeEvent: EventEmitter<IBook[]> = new EventEmitter();
 
   basketData: IBook[] = [];
 
@@ -22,8 +17,12 @@ export class CartService {
 
   totalSum = 0;
 
-  constructor(private booksService: BooksService) {
-    this.booksService.getBooks().subscribe((n) => (this.booksData = n));
+  getTotalQuantity(): number {
+    return this.totalQuantity;
+  }
+
+  getTotalSum(): number {
+    return this.totalSum;
   }
 
   onChangeInput(): void {
@@ -32,51 +31,54 @@ export class CartService {
 
   increaseQuantity(book: IBook): void {
     book.count++;
+    this.basketData[this.basketData.indexOf(book)] = book;
     this.updateCartData();
   }
 
   decreaseQuantity(book: IBook): void {
     if (book.count > 0) {
       book.count--;
+      this.basketData[this.basketData.indexOf(book)] = book;
       this.updateCartData();
     }
   }
 
-  removeAll(): void {
+  removeAll(booksData: IBook[]): void {
     for (const book of this.basketData) {
-      this.booksData[book.id].isAvailable = true;
+      booksData[book.id].isAvailable = true;
     }
     this.basketData = [];
     this.updateCartData();
   }
 
   removeBook(id: number): void {
-    this.booksData[this.basketData[id].id].isAvailable = true;
     this.basketData.splice(id, 1);
     this.updateCartData();
   }
 
   addBook(book: IBook): void {
     this.basketData.push(book);
-    console.log(this.basketData);
     this.updateCartData();
+  }
+
+  getBasketData(): IBook[] {
+    return this.basketData;
   }
 
   updateCartData(): void {
     this.totalQuantity = Number(
       this.basketData.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.count,
+        (accumulator, currentValue) => accumulator + Number(currentValue.count),
         0
       )
     );
-    this.totalSum = this.basketData.reduce(
-      (accumulator, currentValue) =>
-        (accumulator + currentValue.price) * currentValue.count,
-      0
-    );
-    this.clickEvent.emit(this.basketData);
+    let currentCost = 0;
+    for (const book of this.basketData) {
+      currentCost += book.count * book.price;
+    }
+    this.totalSum = currentCost;
     this.clickSumEvent.emit(this.totalSum);
     this.clickQuantityEvent.emit(this.totalQuantity);
-    this.removeEvent.emit(this.booksData);
+    this.cartChangeEvent.emit(this.basketData);
   }
 }

@@ -1,6 +1,6 @@
 <div
   class="book-wrapper"
-  *ngFor="let book of bookData$ | async"
+  *ngFor="let book of bookData$ | async; index as i"
   [style.background]="book.isAvailable ? '' : 'grey'"
 >
   <h1>{{ book.name }}</h1>
@@ -13,4 +13,5 @@
     [(ngModel)]="book.count"
     [disabled]="!book.isAvailable"
   />
+  <a [routerLink]="'product/' + i">See the cart</a>
 </div>

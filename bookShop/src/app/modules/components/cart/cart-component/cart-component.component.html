@@ -17,6 +17,14 @@
 <h1>Quantity: {{ totalQuantity }}</h1>
 
 <app-cart-item-component
+  *ngIf="basketData.length > 0; else emptyBlock"
   [flag]="flag"
   [term]="selectedOption"
+  [basketData]="basketData"
+  [booksData]="booksData"
+  (removeBookEvent)="removeBook($event)"
 ></app-cart-item-component>
+
+<ng-template #emptyBlock>You not bought anything</ng-template>
+
+<a routerLink="/order" *ngIf="basketData[0]">Сделать заказ</a>

@@ -1,14 +1,4 @@
-import {
-  Component,
-  ViewChild,
-  ElementRef,
-  OnInit,
-  AfterViewInit,
-} from '@angular/core';
-import { IBook, Category } from './shared/models/BookModel';
-import { BooksService } from './core/services/books.service';
-import { CartService } from './core/services/cart.service';
-import { Observable } from 'rxjs';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -20,17 +10,9 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('appTitle', { static: false })
   pRef!: ElementRef;
 
-  basketData: IBook[] = [];
-
-  constructor(private cartService: CartService) {
-    this.cartService.clickEvent.subscribe((data) => (this.basketData = data));
-  }
+  constructor() {}
 
   ngAfterViewInit(): void {
     this.pRef.nativeElement.textContent = 'bookShop';
-  }
-
-  onBuy(book: IBook): void {
-    this.cartService.addBook(book);
   }
 }
