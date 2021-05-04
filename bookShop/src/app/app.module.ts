@@ -13,7 +13,12 @@ import { OrdersModule } from './modules/components/order/orders.module';
 import { AdminComponent } from './modules/components/admin/admin-component/admin.component';
 import { AdminModule } from './modules/components/admin/admin.module';
 import { AdminGuard } from './shared/guards/admin.guard';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
+import { IntercepterService } from './core/services/intercepter.service';
 
 @NgModule({
   declarations: [AppComponent, AboutComponentComponent],
@@ -28,7 +33,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     AdminModule,
     HttpClientModule,
   ],
-  providers: [AdminGuard],
+  providers: [
+    AdminGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: IntercepterService, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

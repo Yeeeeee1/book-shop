@@ -3,14 +3,10 @@ import { Observable } from 'rxjs';
 import { IBook } from '../../shared/models/BookModel';
 import { HttpClient } from '@angular/common/http';
 
-const PRODUCTS: IBook[] = [];
-
 @Injectable({
   providedIn: 'root',
 })
 export class BooksService {
-  //products: IBook[] = PRODUCTS;
-
   constructor(private httpClient: HttpClient) {}
 
   getBooks(): Observable<IBook[]> {
