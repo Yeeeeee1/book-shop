@@ -18,7 +18,7 @@ import { CartService } from '../../../../../core/services/cart.service';
   templateUrl: './cart-item-component.component.html',
   styleUrls: ['./cart-item-component.component.scss'],
 })
-export class CartItemComponentComponent implements OnInit {
+export class CartItemComponentComponent implements OnInit, OnDestroy {
   @Input()
   flag!: boolean;
   @Input()
@@ -28,6 +28,9 @@ export class CartItemComponentComponent implements OnInit {
 
   @Output() removeBookEvent = new EventEmitter<number>();
 
+  paramSub: Subscription | null = new Subscription();
+  bookSub: Subscription | null = new Subscription();
+
   constructor(
     private cartService: CartService,
     private route: ActivatedRoute,
@@ -35,12 +38,25 @@ export class CartItemComponentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((param) => {
+    this.paramSub = this.route.paramMap.subscribe((param) => {
       const id = param.get('id');
       if (id !== null) {
-        this.basketData.push(this.booksService.products[Number(id)]);
+        this.bookSub = this.booksService
+          .getBooks()
+          .subscribe((data) => this.basketData.push(data[Number(id)]));
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.paramSub) {
+      this.paramSub.unsubscribe();
+      this.paramSub = null;
+    }
+    if (this.bookSub) {
+      this.bookSub.unsubscribe();
+      this.bookSub = null;
+    }
   }
 
   onChangeInput(): void {

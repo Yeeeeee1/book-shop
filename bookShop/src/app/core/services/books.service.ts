@@ -1,7 +1,7 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { IBook, Category } from '../../shared/models/BookModel';
-import { CartService } from './cart.service';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IBook } from '../../shared/models/BookModel';
+import { HttpClient } from '@angular/common/http';
 
 const PRODUCTS: IBook[] = [];
 
@@ -9,15 +9,26 @@ const PRODUCTS: IBook[] = [];
   providedIn: 'root',
 })
 export class BooksService {
-  products: IBook[] = PRODUCTS;
+  //products: IBook[] = PRODUCTS;
+
+  constructor(private httpClient: HttpClient) {}
 
   getBooks(): Observable<IBook[]> {
-    return of(this.products);
+    return this.httpClient.get<IBook[]>(`http://localhost:3000/books`);
   }
 
-  addBook(book: IBook): void {
-    this.products.push(book);
+  addBook(book: IBook): Observable<IBook[]> {
+    return this.httpClient.post<IBook[]>(`http://localhost:3000/books`, book);
   }
 
-  constructor() {}
+  updateProduct(id: number, newBook: IBook): Observable<IBook> {
+    return this.httpClient.put<IBook>(
+      `http://localhost:3000/books/${id}`,
+      newBook
+    );
+  }
+
+  removeProduct(id: number): Observable<any> {
+    return this.httpClient.delete(`http://localhost:3000/books/${id}`);
+  }
 }

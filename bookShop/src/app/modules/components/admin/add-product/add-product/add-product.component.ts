@@ -25,6 +25,8 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   dataSub: Subscription | null = new Subscription();
 
+  addSub: Subscription | null = new Subscription();
+
   constructor(private booksService: BooksService, private router: Router) {}
 
   ngOnInit(): void {
@@ -38,11 +40,15 @@ export class AddProductComponent implements OnInit, OnDestroy {
       this.dataSub.unsubscribe();
       this.dataSub = null;
     }
+    if (this.addSub) {
+      this.addSub.unsubscribe();
+      this.addSub = null;
+    }
   }
 
   save(): void {
     this.book.createDate = Date.now();
-    this.booksService.addBook(this.book);
+    this.addSub = this.booksService.addBook(this.book).subscribe();
     alert('Продукт добавлен!');
     this.router.navigate([``]);
   }

@@ -13,6 +13,7 @@ import { OrdersModule } from './modules/components/order/orders.module';
 import { AdminComponent } from './modules/components/admin/admin-component/admin.component';
 import { AdminModule } from './modules/components/admin/admin.module';
 import { AdminGuard } from './shared/guards/admin.guard';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, AboutComponentComponent],
@@ -25,6 +26,7 @@ import { AdminGuard } from './shared/guards/admin.guard';
     CartModule,
     OrdersModule,
     AdminModule,
+    HttpClientModule,
   ],
   providers: [AdminGuard],
   bootstrap: [AppComponent],
