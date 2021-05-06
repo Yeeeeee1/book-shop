@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnChanges, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { BooksService } from 'src/app/core/services/books.service';
 import { IBook } from 'src/app/shared/models/BookModel';
@@ -15,14 +15,16 @@ export class ProductsComponentComponent implements OnDestroy {
 
   constructor(private booksService: BooksService) {}
 
-  removeBook(id: number): void {
-    this.removeSub = this.booksService.removeProduct(id).subscribe();
-  }
-
   ngOnDestroy(): void {
     if (this.removeSub) {
       this.removeSub.unsubscribe();
       this.removeSub = null;
     }
+  }
+
+  removeBook(id: number): void {
+    this.removeSub = this.booksService
+      .removeProduct(id)
+      .subscribe(() => (this.bookData$ = this.booksService.getBooks()));
   }
 }

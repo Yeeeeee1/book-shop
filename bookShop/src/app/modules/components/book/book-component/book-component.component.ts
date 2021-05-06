@@ -35,7 +35,7 @@ export class BookComponentComponent implements OnInit, OnDestroy {
     if (this.localStorageService.getItem('app-settings') === undefined) {
       this.settingsSub = this.appSettingsService
         .getSettings()
-        .subscribe((data) => (this.someSetting = data));
+        .subscribe((data) => (this.someSetting = data.someSetting));
       this.localStorageService.setItem('app-settings', this.someSetting);
     } else {
       this.someSetting = this.localStorageService.getItem('app-settings');

@@ -25,6 +25,7 @@ export class BooksService {
   }
 
   removeProduct(id: number): Observable<any> {
+    console.log(id);
     return this.httpClient.delete(`http://localhost:3000/books/${id}`);
   }
 }
