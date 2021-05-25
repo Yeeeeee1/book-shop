@@ -6,4 +6,5 @@
   <h2>{{ book.price | currency }}</h2>
   <h3>{{ book.category }}</h3>
   <a [routerLink]="'edit/' + i">Change</a>
+  <button (click)="removeBook(book.id)">Remove</button>
 </div>

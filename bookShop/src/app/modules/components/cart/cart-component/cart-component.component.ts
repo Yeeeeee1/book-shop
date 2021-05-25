@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BooksService } from 'src/app/core/services/books.service';
 import { CartService } from '../../../../core/services/cart.service';
@@ -22,12 +21,10 @@ export class CartComponentComponent implements OnInit, OnDestroy {
   cartServiceSumSub: Subscription | null = new Subscription();
   cartServiceCartData: Subscription | null = new Subscription();
 
-  paramSub: Subscription | null = new Subscription();
   booksDataSub: Subscription | null = new Subscription();
 
   constructor(
     private cartService: CartService,
-    private route: ActivatedRoute,
     private booksService: BooksService
   ) {}
 
@@ -47,22 +44,12 @@ export class CartComponentComponent implements OnInit, OnDestroy {
     this.cartServiceCartData = this.cartService.cartChangeEvent.subscribe(
       (data) => (this.basketData = data)
     );
-    this.paramSub = this.route.paramMap.subscribe((param) => {
-      const id = param.get('id');
-      if (id !== null) {
-        this.basketData.push(this.booksService.products[Number(id)]);
-      }
-    });
   }
 
   ngOnDestroy(): void {
     if (this.booksDataSub) {
       this.booksDataSub.unsubscribe();
       this.booksDataSub = null;
-    }
-    if (this.paramSub) {
-      this.paramSub.unsubscribe();
-      this.paramSub = null;
     }
     if (this.cartServiceQuantitySub) {
       this.cartServiceQuantitySub.unsubscribe();

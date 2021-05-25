@@ -28,6 +28,8 @@ export class EditComponentComponent implements OnInit, OnDestroy {
 
   dataSub: Subscription | null = new Subscription();
 
+  updSub: Subscription | null = new Subscription();
+
   constructor(
     private booksService: BooksService,
     private route: ActivatedRoute,
@@ -53,11 +55,16 @@ export class EditComponentComponent implements OnInit, OnDestroy {
       this.paramSub.unsubscribe();
       this.paramSub = null;
     }
+    if (this.updSub) {
+      this.updSub.unsubscribe();
+      this.updSub = null;
+    }
   }
 
   save(): void {
-    this.booksService.products[this.id] = this.book;
-    this.localStorageService.setItem('booksData', this.booksService.products);
+    this.updSub = this.booksService
+      .updateProduct(this.id, this.book)
+      .subscribe();
     alert('Изменения приняты!');
     this.router.navigate([``]);
   }

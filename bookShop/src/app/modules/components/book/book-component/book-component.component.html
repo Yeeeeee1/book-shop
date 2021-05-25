@@ -15,3 +15,13 @@
   />
   <a [routerLink]="'product/' + i">See the cart</a>
 </div>
+
+<div class="settings">
+  <label for="settingsBox">Somesetting</label>
+  <input
+    #settingsBox
+    type="checkbox"
+    [(ngModel)]="someSetting"
+    (change)="changeSettings(settingsBox.checked)"
+  />
+</div>
