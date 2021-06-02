@@ -20,7 +20,6 @@ import {
 } from '@angular/common/http';
 import { IntercepterService } from './core/services/intercepter.service';
 
-import { booksReducer } from './state/books.reducer';
 import { collectionReducer } from './state/collection.reducer';
 import { StoreModule } from '@ngrx/store';
 
@@ -36,7 +35,7 @@ import { StoreModule } from '@ngrx/store';
     OrdersModule,
     AdminModule,
     HttpClientModule,
-    StoreModule.forRoot({ books: booksReducer, collection: collectionReducer }),
+    StoreModule.forRoot({ collection: collectionReducer }),
   ],
   providers: [
     AdminGuard,

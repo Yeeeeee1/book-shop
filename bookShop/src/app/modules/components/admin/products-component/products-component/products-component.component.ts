@@ -18,7 +18,9 @@ import {
   styleUrls: ['./products-component.component.scss'],
 })
 export class ProductsComponentComponent implements OnDestroy {
-  bookData$: Observable<IBook[]> = this.store.pipe(select(selectBooks));
+  bookData$: Observable<IBook[]> = this.store.select(
+    (store: any) => store.collection
+  );
 
   removeSub: Subscription | null = new Subscription();
 
@@ -28,7 +30,7 @@ export class ProductsComponentComponent implements OnDestroy {
     this.booksService
       .getBooks()
       .subscribe((Book) => this.store.dispatch(retrievedBookList({ Book })));
-    console.log(this.store.subscribe((data) => console.log(data)));
+    this.bookData$.subscribe((data) => console.log(data));
   }
 
   ngOnDestroy(): void {
@@ -40,6 +42,5 @@ export class ProductsComponentComponent implements OnDestroy {
 
   removeBook(bookId: number): void {
     this.store.dispatch(removeBook({ bookId }));
-    console.log(this.store.subscribe((data) => console.log(data)));
   }
 }

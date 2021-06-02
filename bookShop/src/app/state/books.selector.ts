@@ -1,12 +1,12 @@
-import { createSelector, createFeatureSelector } from "@ngrx/store";
-import { AppState } from "./app.state";
-import { IBook } from "../shared/models/BookModel";
- 
+import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { AppState } from './app.state';
+import { IBook } from '../shared/models/BookModel';
+
 export const selectBooks = createSelector(
   (state: any) => state.books,
   (books: Array<IBook>) => books
 );
- 
+
 /*export const selectCollectionState = createFeatureSelector<
   AppState,
   ReadonlyArray<string>
