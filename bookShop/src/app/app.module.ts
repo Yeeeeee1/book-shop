@@ -22,6 +22,8 @@ import { IntercepterService } from './core/services/intercepter.service';
 
 import { collectionReducer } from './state/collection.reducer';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { BooksEffects } from './state/books.effects';
 
 @NgModule({
   declarations: [AppComponent, AboutComponentComponent],
@@ -36,6 +38,7 @@ import { StoreModule } from '@ngrx/store';
     AdminModule,
     HttpClientModule,
     StoreModule.forRoot({ collection: collectionReducer }),
+    EffectsModule.forRoot([BooksEffects]),
   ],
   providers: [
     AdminGuard,
