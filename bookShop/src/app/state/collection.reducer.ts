@@ -1,6 +1,5 @@
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { IBook } from '../shared/models/BookModel';
-import { AppState } from './app.state';
 import { addBook, removeBook } from './books.actions';
 import { retrievedBookList } from './books.actions';
 
@@ -12,9 +11,5 @@ export const collectionReducer = createReducer(
   on(removeBook, (state, { bookId }) =>
     state.filter((book) => book.id !== bookId)
   ),
-  on(addBook, (state, { bookId }) => {
-    if (state.indexOf(bookId) > -1) return state;
-
-    return [...state, bookId];
-  })
+  on(addBook, (state, Book) => [...state, Book])
 );

@@ -13,7 +13,7 @@
     [(ngModel)]="book.count"
     [disabled]="!book.isAvailable"
   />
-  <a [routerLink]="'product/' + i">See the cart</a>
+  <button (click)="onOpenDetails(book.id)">See the cart</button>
 </div>
 
 <div class="settings">

@@ -1,9 +1,7 @@
 import { createAction, props } from '@ngrx/store';
+import { IBook } from '../shared/models/BookModel';
 
-export const addBook = createAction(
-  '[Book List] Add Book',
-  props<{ bookId: any }>()
-);
+export const addBook = createAction('[Book List] Add Book', props<IBook>());
 
 export const removeBook = createAction(
   '[Book Collection] Remove Book',

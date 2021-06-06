@@ -11,6 +11,8 @@ import { IBook } from '../../../../shared/models/BookModel';
 import { CartService } from 'src/app/core/services/cart.service';
 import { AppSettingsService } from 'src/app/core/services/app-settings.service';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { Store } from '@ngrx/store';
+import { RouterActions } from 'src/app/state/router/router.actions';
 
 @Component({
   selector: 'app-book-component',
@@ -28,7 +30,8 @@ export class BookComponentComponent implements OnInit, OnDestroy {
     private booksService: BooksService,
     private cartService: CartService,
     private appSettingsService: AppSettingsService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -56,5 +59,11 @@ export class BookComponentComponent implements OnInit, OnDestroy {
 
   changeSettings(changedSettings: boolean): void {
     this.localStorageService.setItem('app-settings', changedSettings);
+  }
+
+  onOpenDetails(id: number) {
+    alert();
+    console.log(id);
+    this.store.dispatch(RouterActions.goToProductDetails({ id }));
   }
 }

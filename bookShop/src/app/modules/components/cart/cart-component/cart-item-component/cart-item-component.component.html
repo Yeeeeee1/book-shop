@@ -1,6 +1,6 @@
 <div
   class="book-wrapper"
-  *ngFor="let book of basketData | orderBy: term:flag; index as i"
+  *ngFor="let book of basketData | async; index as i"
   appChangeBackground
 >
   <button (click)="removeBook(i)">Delete</button>

@@ -24,6 +24,8 @@ import { collectionReducer } from './state/collection.reducer';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { BooksEffects } from './state/books.effects';
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { RouterEffects } from './state/router/router.effects';
 
 @NgModule({
   declarations: [AppComponent, AboutComponentComponent],
@@ -38,7 +40,9 @@ import { BooksEffects } from './state/books.effects';
     AdminModule,
     HttpClientModule,
     StoreModule.forRoot({ collection: collectionReducer }),
-    EffectsModule.forRoot([BooksEffects]),
+    EffectsModule.forRoot([BooksEffects, RouterEffects]),
+    StoreRouterConnectingModule.forRoot(),
+    StoreModule.forFeature('router', routerReducer),
   ],
   providers: [
     AdminGuard,

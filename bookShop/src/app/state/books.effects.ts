@@ -6,20 +6,20 @@ import { BooksService } from '../core/services/books.service';
 
 @Injectable()
 export class BooksEffects {
-  /*loadBooks$ = createEffect(() =>
+  addBlog$ = createEffect(() =>
     this.actions$.pipe(
-      ofType('[Books Page] Load Books'),
-      mergeMap(() =>
-        this.booksService.getBooks().pipe(
+      ofType('[Book List] Add Book'),
+      mergeMap((res: any) =>
+        this.booksService.addBook(res).pipe(
           map((book) => ({
-            type: '[Books API] Books Loaded Success',
+            type: '[Books API] Books Deleted Success',
             payload: book,
           })),
           catchError(() => EMPTY)
         )
       )
     )
-  );*/
+  );
 
   deleteBlog$ = createEffect(() =>
     this.actions$.pipe(

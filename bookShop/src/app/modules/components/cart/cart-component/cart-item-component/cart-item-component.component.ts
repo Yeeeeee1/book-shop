@@ -7,10 +7,17 @@ import {
   Output,
 } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { BooksService } from 'src/app/core/services/books.service';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { IBook, Category } from 'src/app/shared/models/BookModel';
+import { retrievedBookList } from 'src/app/state/books.actions';
+import {
+  selectProductByUrl,
+  selectRouterProductId,
+  selectRouterState,
+} from 'src/app/state/router/router.selector';
 import { CartService } from '../../../../../core/services/cart.service';
 
 @Component({
@@ -23,7 +30,7 @@ export class CartItemComponentComponent implements OnInit, OnDestroy {
   flag!: boolean;
   @Input()
   term!: keyof IBook;
-  @Input() basketData: IBook[] = [];
+  basketData: any = this.store.select(selectProductByUrl);
   @Input() booksData: IBook[] = [];
 
   @Output() removeBookEvent = new EventEmitter<number>();
@@ -34,18 +41,14 @@ export class CartItemComponentComponent implements OnInit, OnDestroy {
   constructor(
     private cartService: CartService,
     private route: ActivatedRoute,
-    private booksService: BooksService
+    private booksService: BooksService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
-    this.paramSub = this.route.paramMap.subscribe((param) => {
-      const id = param.get('id');
-      if (id !== null) {
-        this.bookSub = this.booksService
-          .getBooks()
-          .subscribe((data) => this.basketData.push(data[Number(id)]));
-      }
-    });
+    this.booksService
+      .getBooks()
+      .subscribe((Book) => this.store.dispatch(retrievedBookList({ Book })));
   }
 
   ngOnDestroy(): void {
