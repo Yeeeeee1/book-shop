@@ -20,6 +20,7 @@
   *ngIf="basketData.length > 0; else emptyBlock"
   [flag]="flag"
   [term]="selectedOption"
+  [basketData]="basketData"
   [booksData]="booksData"
   (removeBookEvent)="removeBook($event)"
 ></app-cart-item-component>

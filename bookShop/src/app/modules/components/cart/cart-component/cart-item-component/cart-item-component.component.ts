@@ -30,7 +30,7 @@ export class CartItemComponentComponent implements OnInit, OnDestroy {
   flag!: boolean;
   @Input()
   term!: keyof IBook;
-  basketData: any = this.store.select(selectProductByUrl);
+  @Input() basketData: IBook[] = [];
   @Input() booksData: IBook[] = [];
 
   @Output() removeBookEvent = new EventEmitter<number>();
@@ -49,6 +49,7 @@ export class CartItemComponentComponent implements OnInit, OnDestroy {
     this.booksService
       .getBooks()
       .subscribe((Book) => this.store.dispatch(retrievedBookList({ Book })));
+    const product = this.store.select(selectProductByUrl);
   }
 
   ngOnDestroy(): void {
