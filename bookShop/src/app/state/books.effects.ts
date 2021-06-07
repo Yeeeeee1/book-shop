@@ -18,7 +18,10 @@ export class BooksEffects {
             type: '[Books API] Books Deleted Success',
             payload: book,
           })),
-          catchError(() => EMPTY)
+          catchError((error) => {
+            console.log('Error:', error);
+            return EMPTY;
+          })
         )
       )
     )
@@ -33,7 +36,10 @@ export class BooksEffects {
             type: '[Books API] Books Deleted Success',
             payload: book,
           })),
-          catchError((error) => EMPTY)
+          catchError((error) => {
+            console.log('Error:', error);
+            return EMPTY;
+          })
         )
       )
     )

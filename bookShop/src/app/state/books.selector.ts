@@ -1,4 +1,4 @@
-import { createSelector, StoreModule } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import { IBook } from '../shared/models/BookModel';
 
 export const selectBooks = createSelector(
