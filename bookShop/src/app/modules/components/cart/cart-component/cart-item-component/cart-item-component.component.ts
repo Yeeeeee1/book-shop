@@ -6,18 +6,12 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { BooksService } from 'src/app/core/services/books.service';
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
-import { IBook, Category } from 'src/app/shared/models/BookModel';
+import { IBook } from 'src/app/shared/models/BookModel';
 import { retrievedBookList } from 'src/app/state/books.actions';
-import {
-  selectProductByUrl,
-  selectRouterProductId,
-  selectRouterState,
-} from 'src/app/state/router/router.selector';
+import { selectProductByUrl } from 'src/app/state/router/router.selector';
 import { CartService } from '../../../../../core/services/cart.service';
 
 @Component({
@@ -35,31 +29,25 @@ export class CartItemComponentComponent implements OnInit, OnDestroy {
 
   @Output() removeBookEvent = new EventEmitter<number>();
 
-  paramSub: Subscription | null = new Subscription();
-  bookSub: Subscription | null = new Subscription();
+  booksSub: Subscription | null = new Subscription();
 
   constructor(
     private cartService: CartService,
-    private route: ActivatedRoute,
     private booksService: BooksService,
     private store: Store
   ) {}
 
   ngOnInit(): void {
-    this.booksService
+    this.booksSub = this.booksService
       .getBooks()
-      .subscribe((Book) => this.store.dispatch(retrievedBookList({ Book })));
+      .subscribe((books) => this.store.dispatch(retrievedBookList({ books })));
     const product = this.store.select(selectProductByUrl);
   }
 
   ngOnDestroy(): void {
-    if (this.paramSub) {
-      this.paramSub.unsubscribe();
-      this.paramSub = null;
-    }
-    if (this.bookSub) {
-      this.bookSub.unsubscribe();
-      this.bookSub = null;
+    if (this.booksSub) {
+      this.booksSub.unsubscribe();
+      this.booksSub = null;
     }
   }
 

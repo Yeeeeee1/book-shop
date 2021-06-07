@@ -62,8 +62,6 @@ export class BookComponentComponent implements OnInit, OnDestroy {
   }
 
   onOpenDetails(id: number) {
-    alert();
-    console.log(id);
     this.store.dispatch(RouterActions.goToProductDetails({ id }));
   }
 }

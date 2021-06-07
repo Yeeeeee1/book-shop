@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { BooksService } from 'src/app/core/services/books.service';
 import { IBook } from 'src/app/shared/models/BookModel';
 
@@ -16,15 +16,24 @@ import { selectBooks } from 'src/app/state/books.selector';
   templateUrl: './products-component.component.html',
   styleUrls: ['./products-component.component.scss'],
 })
-export class ProductsComponentComponent {
+export class ProductsComponentComponent implements OnInit, OnDestroy {
   bookData$: Observable<IBook[]> = this.store.select(selectBooks);
+
+  booksSub: Subscription | null = new Subscription();
 
   constructor(private booksService: BooksService, private store: Store) {}
 
   ngOnInit(): void {
-    this.booksService
+    this.booksSub = this.booksService
       .getBooks()
-      .subscribe((Book) => this.store.dispatch(retrievedBookList({ Book })));
+      .subscribe((books) => this.store.dispatch(retrievedBookList({ books })));
+  }
+
+  ngOnDestroy(): void {
+    if (this.booksSub) {
+      this.booksSub.unsubscribe();
+      this.booksSub = null;
+    }
   }
 
   removeBook(bookId: number): void {

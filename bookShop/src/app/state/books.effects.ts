@@ -9,30 +9,32 @@ export class BooksEffects {
   addBlog$ = createEffect(() =>
     this.actions$.pipe(
       ofType('[Book List] Add Book'),
-      mergeMap((res: any) =>
-        this.booksService.addBook(res).pipe(
+      mergeMap((res: any) => {
+        console.log(res);
+        return this.booksService.addBook(res).pipe(
           map((book) => ({
             type: '[Books API] Books Deleted Success',
             payload: book,
           })),
           catchError(() => EMPTY)
-        )
-      )
+        );
+      })
     )
   );
 
   deleteBlog$ = createEffect(() =>
     this.actions$.pipe(
       ofType('[Book Collection] Remove Book'),
-      mergeMap((res: any) =>
-        this.booksService.removeProduct(res.bookId).pipe(
+      mergeMap((res: any) => {
+        console.log(res);
+        return this.booksService.removeProduct(res.bookId).pipe(
           map((book) => ({
             type: '[Books API] Books Deleted Success',
             payload: book,
           })),
           catchError(() => EMPTY)
-        )
-      )
+        );
+      })
     )
   );
 

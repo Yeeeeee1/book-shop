@@ -32,9 +32,9 @@ export class AddProductComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.booksSub = this.booksService.getBooks().subscribe((Book) => {
-      this.book.id = Book.length - 1;
-    });
+    this.booksSub = this.booksService
+      .getBooks()
+      .subscribe((data) => (this.book.id = data.length - 1));
   }
 
   ngOnDestroy(): void {

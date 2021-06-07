@@ -7,9 +7,9 @@ export const initialState: ReadonlyArray<IBook> = [];
 
 export const collectionReducer = createReducer(
   initialState,
-  on(retrievedBookList, (state, { Book }) => [...Book]),
+  on(retrievedBookList, (state, { books }) => [...books]),
   on(removeBook, (state, { bookId }) =>
     state.filter((book) => book.id !== bookId)
   ),
-  on(addBook, (state, Book) => [...state, Book])
+  on(addBook, (state, book) => [...state, book])
 );
