@@ -12,7 +12,6 @@ export const selectRouterState =
 export const selectRouterProductId = createSelector(
   selectRouterState,
   (state: any) => {
-    console.log(state.state.root.firstChild.params.id);
     return state.state.root.firstChild.params.id;
   }
 );
@@ -20,8 +19,5 @@ export const selectRouterProductId = createSelector(
 export const selectProductByUrl = createSelector(
   selectBooks,
   selectRouterProductId,
-  (products, id) => {
-    console.log(products);
-    return products[id];
-  }
+  (products, id) => products[id]
 );

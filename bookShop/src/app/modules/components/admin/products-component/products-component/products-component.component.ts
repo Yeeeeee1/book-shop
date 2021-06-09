@@ -10,6 +10,8 @@ import {
   removeBook,
 } from '../../../../../state/books.actions';
 import { selectBooks } from 'src/app/state/books.selector';
+import { AppState } from 'src/app/state/app.state';
+import { IStore } from 'src/app/state/models/StoreModel';
 
 @Component({
   selector: 'app-products-component',
@@ -21,7 +23,10 @@ export class ProductsComponentComponent implements OnInit, OnDestroy {
 
   booksSub: Subscription | null = new Subscription();
 
-  constructor(private booksService: BooksService, private store: Store) {}
+  constructor(
+    private booksService: BooksService,
+    private store: Store<IStore>
+  ) {}
 
   ngOnInit(): void {
     this.booksSub = this.booksService

@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 import { BooksService } from 'src/app/core/services/books.service';
 import { IBook } from 'src/app/shared/models/BookModel';
 import { retrievedBookList } from 'src/app/state/books.actions';
+import { IStore } from 'src/app/state/models/StoreModel';
 import { selectProductByUrl } from 'src/app/state/router/router.selector';
 import { CartService } from '../../../../../core/services/cart.service';
 
@@ -34,7 +35,7 @@ export class CartItemComponentComponent implements OnInit, OnDestroy {
   constructor(
     private cartService: CartService,
     private booksService: BooksService,
-    private store: Store
+    private store: Store<IStore>
   ) {}
 
   ngOnInit(): void {
