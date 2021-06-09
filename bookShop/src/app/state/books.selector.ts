@@ -5,6 +5,6 @@ import { AppState } from './app.state';
 import { IStore } from './models/StoreModel';
 
 export const selectBooks = createSelector(
-  (state: IStore) => state.collection,
+  (state: IStore) => state.collection.books,
   (books: IBook[]) => books
 );
