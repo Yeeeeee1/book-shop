@@ -1,30 +1,47 @@
-import { Component, OnChanges, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { BooksService } from 'src/app/core/services/books.service';
 import { IBook } from 'src/app/shared/models/BookModel';
+
+import { Store } from '@ngrx/store';
+
+import {
+  retrievedBookList,
+  removeBook,
+} from '../../../../../state/books.actions';
+import { selectBooks } from 'src/app/state/books.selector';
+import { AppState } from 'src/app/state/app.state';
+import { IStore } from 'src/app/state/models/StoreModel';
 
 @Component({
   selector: 'app-products-component',
   templateUrl: './products-component.component.html',
   styleUrls: ['./products-component.component.scss'],
 })
-export class ProductsComponentComponent implements OnDestroy {
-  bookData$: Observable<IBook[]> = this.booksService.getBooks();
+export class ProductsComponentComponent implements OnInit, OnDestroy {
+  bookData$: Observable<IBook[]> = this.store.select(selectBooks);
 
-  removeSub: Subscription | null = new Subscription();
+  booksSub: Subscription | null = new Subscription();
 
-  constructor(private booksService: BooksService) {}
+  constructor(
+    private booksService: BooksService,
+    private store: Store<IStore>
+  ) {}
+
+  ngOnInit(): void {
+    this.booksSub = this.booksService
+      .getBooks()
+      .subscribe((books) => this.store.dispatch(retrievedBookList({ books })));
+  }
 
   ngOnDestroy(): void {
-    if (this.removeSub) {
-      this.removeSub.unsubscribe();
-      this.removeSub = null;
+    if (this.booksSub) {
+      this.booksSub.unsubscribe();
+      this.booksSub = null;
     }
   }
 
-  removeBook(id: number): void {
-    this.removeSub = this.booksService
-      .removeProduct(id)
-      .subscribe(() => (this.bookData$ = this.booksService.getBooks()));
+  removeBook(bookId: number): void {
+    this.store.dispatch(removeBook({ bookId }));
   }
 }
