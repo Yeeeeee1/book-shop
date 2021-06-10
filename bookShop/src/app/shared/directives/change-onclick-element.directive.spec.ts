@@ -2,7 +2,8 @@ import { ChangeOnclickElementDirective } from './change-onclick-element.directiv
 
 describe('ChangeOnclickElementDirective', () => {
   it('should create an instance', () => {
-    const directive = new ChangeOnclickElementDirective();
+    let a: any;
+    const directive = new ChangeOnclickElementDirective(a, a);
     expect(directive).toBeTruthy();
   });
 });
