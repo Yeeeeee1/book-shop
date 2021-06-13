@@ -17,7 +17,8 @@ describe('AppSettingsService', () => {
     expect(service).toBeTruthy();
   });
   it('should return settings', () => {
-    const settings = service.getSettings();
-    expect(settings).toBeTruthy();
+    spyOn(service, 'getSettings');
+    service.getSettings();
+    expect(service.getSettings).toHaveBeenCalledTimes(1);
   });
 });

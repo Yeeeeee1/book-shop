@@ -20,6 +20,8 @@ describe('OrderByPipe', () => {
         id: 2,
       },
     ];
-    expect(pipe.transform(data, 'name', false)).toBeTruthy();
+    spyOn(pipe, 'transform');
+    pipe.transform(data, 'name', false);
+    expect(pipe.transform).toHaveBeenCalledOnceWith(data, 'name', false);
   });
 });

@@ -22,4 +22,10 @@ describe('CartComponentComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should not call removeBook without event', () => {
+    fixture.detectChanges();
+    spyOn(component, 'removeBook');
+    expect(component.removeBook).toHaveBeenCalledTimes(0);
+  });
 });
